@@ -1,7 +1,2 @@
 hahahahahahhaaasdasdasdasdasdasdas
 ]
-asdasdasdasdasdasdas
-HFUAOIWHFNIEDWSFCVIWSREHFVNIECNJHDEIFCJNEljfcd
-[][][][][][][][][][]
-______________________________________________________________
-==============================================
