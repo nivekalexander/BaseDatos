@@ -49,3 +49,19 @@ CREATE TABLE TblHorario(
     HorTrimestreNum	Int(5) NOT NULL,
     TblFicha_idFicha	Int(5) NOT NULL
 );
+
+CREATE TABLE TblAnuncio(
+    IdAnu	Int(5) auto_increment PRIMARY KEY,
+    AnuTitulo	Varchar(45) NOT NULL,
+    AnuDescripcion	Varchar(255) NULL,
+    AnuFechaCreacion	Date NOT NULL,	
+    AnuFechaFIn	Date	NOT NULL,
+    TblDisponibilidad_idDis	Int(5) NOT NULL,
+    TblFicha_idFicha4	Int(5) NOT NULL,
+    TblUsuario_idUsu	Int(15) NOT NULL
+);
+
+CREATE TABLE TblDisponibilidad(
+    IdDis	Int(5) auto_increment PRIMARY KEY,
+    DisTipo	Varchar(45) NOT NULL
+);
