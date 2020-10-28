@@ -65,3 +65,45 @@ CREATE TABLE TblDisponibilidad(
     IdDis	Int(5) auto_increment PRIMARY KEY,
     DisTipo	Varchar(45) NOT NULL
 );
+
+/* AÑADIR LLAVES FORANEAS (HACER DESPUES DE CREAR TODAS LAS TABLAS) */ 
+
+ALTER TABLE TblMaterialApoyo
+ADD FOREIGN KEY(TblFases_MaterialApoyo_idFases)
+REFERENCES TblFases_MaterialApoyo(IdFases);
+
+ALTER TABLE TblMaterialApoyo_Ficha
+ADD FOREIGN KEY(TblMaterialApoyo_idMaterialApoyo)
+REFERENCES TblMaterialApoyo(IdMaterialApoyo);
+
+ALTER TABLE TblMaterialApoyo_Ficha
+ADD FOREIGN KEY(TblFicha_idFicha)
+REFERENCES TblFicha(IdFicha);
+
+ALTER TABLE TblFicha
+ADD FOREIGN KEY(TblTipoJornada_Ficha_idTipJor)
+REFERENCES TblTipoJornada_Ficha(IdTipJor);
+
+ALTER TABLE TblFicha
+ADD FOREIGN KEY(TblModalidad_Ficha_idMod)
+REFERENCES TblModalidad_Ficha(IdMod);
+
+ALTER TABLE TblFicha
+ADD FOREIGN KEY(TblTipoOferta_Ficha_idTipOfe)
+REFERENCES TblTipoOferta_Ficha(IdTipOfe);
+
+ALTER TABLE TblHorario
+ADD FOREIGN KEY(TblFicha_idFicha)
+REFERENCES TblFicha(IdFicha);
+
+ALTER TABLE TblAnuncio
+ADD FOREIGN KEY(TblDisponibilidad_idDis)
+REFERENCES TblDisponibilidad(IdDis);
+
+ALTER TABLE TblAnuncio
+ADD FOREIGN KEY(TblFicha_idFicha)
+REFERENCES TblFicha(IdFicha);
+
+ALTER TABLE TblAnuncio
+ADD FOREIGN KEY(TblUsuario_idUsu)
+REFERENCES TblUsuario(IdUsu);
