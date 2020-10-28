@@ -25,4 +25,27 @@ CREATE TABLE TblFicha(
     TblTipoJornada_Ficha_idTipJor Int(5) NOT NULL,
     TblModalidad_Ficha_idMod Int(5) NOT NULL,
     TblTipoOferta_Ficha_idTipOfe Int(5) NOT NULL
-)
+);
+
+CREATE TABLE TblTipoJornada_Ficha(
+    IdTipJor Int(5) auto_increment PRIMARY KEY,
+    TipJorNombre Varchar(45) NOT NULL
+);
+
+CREATE TABLE TblModalidad_Ficha(
+    IdMod	Int(5) auto_increment PRIMARY KEY,
+    ModNombre	Varchar(45) NOT NULL
+);
+
+CREATE TABLE TblTipoOferta_Ficha(
+    IdTipOfe	Int(5) auto_increment PRIMARY KEY,
+    TipOfeNombre	Varchar(45) NOT NULL
+);
+
+CREATE TABLE TblHorario(
+    IdHorario	Int(5) auto_increment PRIMARY KEY,
+    HorTrimestreInicio	Date NOT NULL,		
+    HorTrimestreFin	Date NOT NULL,
+    HorTrimestreNum	Int(5) NOT NULL,
+    TblFicha_idFicha	Int(5) NOT NULL
+);
