@@ -11,7 +11,7 @@ CREATE TABLE TblMaterialApoyo(
     TblFases_TblMaterialApoyo_IdFases	Int(5) NOT NULL
 );
 
-CREATE TABLE TblMaterialApoyo_Ficha(
+CREATE TABLE TblMaterialApoyo_TblFicha(
     IdMatApoFic	Int(5) auto_increment PRIMARY KEY,
     TblMaterialApoyo_IdMaterialApoyo Int(5) NOT NULL,
     TblFicha_IdFicha Int(5) NOT NULL
