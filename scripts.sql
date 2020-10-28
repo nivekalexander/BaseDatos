@@ -1,4 +1,4 @@
-CREATE TABLE TblFases_MaterialApoyo(
+CREATE TABLE TblFases_TblMaterialApoyo(
     IdFases	Int(5) auto_increment PRIMARY KEY,
     FasNombre Varchar(45) NOT NULL
 );
@@ -8,13 +8,13 @@ CREATE TABLE TblMaterialApoyo(
     MatApoTitulo	Varchar(45) NOT NULL,
     MatApoFechaPublicacion	Date NOT NULL,	
     MatApoDescripcion	Varchar(255) NULL,
-    TblFases_MaterialApoyo_idFases	Int(5) NOT NULL
+    TblFases_TblMaterialApoyo_IdFases	Int(5) NOT NULL
 );
 
 CREATE TABLE TblMaterialApoyo_Ficha(
     IdMatApoFic	Int(5) auto_increment PRIMARY KEY,
-    TblMaterialApoyo_idMaterialApoyo Int(5) NOT NULL,
-    TblFicha_idFicha Int(5) NOT NULL
+    TblMaterialApoyo_IdMaterialApoyo Int(5) NOT NULL,
+    TblFicha_IdFicha Int(5) NOT NULL
 );
 
 CREATE TABLE TblFicha(
@@ -22,22 +22,23 @@ CREATE TABLE TblFicha(
     FicFechaInicio	Date NOT NULL,	
     FicFechaFin	Date NOT NULL,	
     FicNumeroFicha	Varchar(45) NOT NULL,
-    TblTipoJornada_Ficha_idTipJor Int(5) NOT NULL,
-    TblModalidad_Ficha_idMod Int(5) NOT NULL,
-    TblTipoOferta_Ficha_idTipOfe Int(5) NOT NULL
+    TblProgramaFormacion_IdProFor Int(5) NOT NULL,
+    TblTipoJornada_TblFicha_IdTipJor Int(5) NOT NULL,
+    TblModalidad_TblFicha_IdMod Int(5) NOT NULL,
+    TblTipoOferta_TblFicha_IdTipOfe Int(5) NOT NULL
 );
 
-CREATE TABLE TblTipoJornada_Ficha(
+CREATE TABLE TblTipoJornada_TblFicha(
     IdTipJor Int(5) auto_increment PRIMARY KEY,
     TipJorNombre Varchar(45) NOT NULL
 );
 
-CREATE TABLE TblModalidad_Ficha(
+CREATE TABLE TblModalidad_TblFicha(
     IdMod	Int(5) auto_increment PRIMARY KEY,
     ModNombre	Varchar(45) NOT NULL
 );
 
-CREATE TABLE TblTipoOferta_Ficha(
+CREATE TABLE TblTipoOferta_TblFicha(
     IdTipOfe	Int(5) auto_increment PRIMARY KEY,
     TipOfeNombre	Varchar(45) NOT NULL
 );
@@ -47,7 +48,7 @@ CREATE TABLE TblHorario(
     HorTrimestreInicio	Date NOT NULL,		
     HorTrimestreFin	Date NOT NULL,
     HorTrimestreNum	Int(5) NOT NULL,
-    TblFicha_idFicha	Int(5) NOT NULL
+    TblFicha_IdFicha	Int(5) NOT NULL
 );
 
 CREATE TABLE TblAnuncio(
@@ -56,9 +57,9 @@ CREATE TABLE TblAnuncio(
     AnuDescripcion	Varchar(255) NULL,
     AnuFechaCreacion	Date NOT NULL,	
     AnuFechaFIn	Date	NOT NULL,
-    TblDisponibilidad_idDis	Int(5) NOT NULL,
-    TblFicha_idFicha4	Int(5) NOT NULL,
-    TblUsuario_idUsu	Int(15) NOT NULL
+    TblDisponibilidad_IdDis	Int(5) NOT NULL,
+    TblFicha_IdFicha	Int(5) NOT NULL,
+    TblUsuario_UsuNumeroID	Int(15) NOT NULL
 );
 
 CREATE TABLE TblDisponibilidad(
@@ -69,41 +70,45 @@ CREATE TABLE TblDisponibilidad(
 /* AÑADIR LLAVES FORANEAS (HACER DESPUES DE CREAR TODAS LAS TABLAS) */ 
 
 ALTER TABLE TblMaterialApoyo
-ADD FOREIGN KEY(TblFases_MaterialApoyo_idFases)
-REFERENCES TblFases_MaterialApoyo(IdFases);
+ADD FOREIGN KEY(TblFases_TblMaterialApoyo_IdFases)
+REFERENCES TblFases_TblMaterialApoyo(IdFases);
 
-ALTER TABLE TblMaterialApoyo_Ficha
-ADD FOREIGN KEY(TblMaterialApoyo_idMaterialApoyo)
+ALTER TABLE TblMaterialApoyo_TblFicha
+ADD FOREIGN KEY(TblMaterialApoyo_IdMaterialApoyo)
 REFERENCES TblMaterialApoyo(IdMaterialApoyo);
 
-ALTER TABLE TblMaterialApoyo_Ficha
-ADD FOREIGN KEY(TblFicha_idFicha)
+ALTER TABLE TblMaterialApoyo_TblFicha
+ADD FOREIGN KEY(TblFicha_IdFicha)
 REFERENCES TblFicha(IdFicha);
 
 ALTER TABLE TblFicha
-ADD FOREIGN KEY(TblTipoJornada_Ficha_idTipJor)
-REFERENCES TblTipoJornada_Ficha(IdTipJor);
+ADD FOREIGN KEY(TblProgramaFormacion_IdProFor)
+REFERENCES TblProgramaFormacion(IdProFor);
 
 ALTER TABLE TblFicha
-ADD FOREIGN KEY(TblModalidad_Ficha_idMod)
-REFERENCES TblModalidad_Ficha(IdMod);
+ADD FOREIGN KEY(TblTipoJornada_TblFicha_IdTipJor)
+REFERENCES TblTipoJornada_TblFicha(IdTipJor);
 
 ALTER TABLE TblFicha
-ADD FOREIGN KEY(TblTipoOferta_Ficha_idTipOfe)
-REFERENCES TblTipoOferta_Ficha(IdTipOfe);
+ADD FOREIGN KEY(TblModalidad_TblFicha_IdMod)
+REFERENCES TblModalidad_TblFicha(IdMod);
+
+ALTER TABLE TblFicha
+ADD FOREIGN KEY(TblTipoOferta_TblFicha_IdTipOfe)
+REFERENCES TblTipoOferta_TblFicha(IdTipOfe);
 
 ALTER TABLE TblHorario
-ADD FOREIGN KEY(TblFicha_idFicha)
+ADD FOREIGN KEY(TblFicha_IdFicha)
 REFERENCES TblFicha(IdFicha);
 
 ALTER TABLE TblAnuncio
-ADD FOREIGN KEY(TblDisponibilidad_idDis)
+ADD FOREIGN KEY(TblDisponibilidad_IdDis)
 REFERENCES TblDisponibilidad(IdDis);
 
 ALTER TABLE TblAnuncio
-ADD FOREIGN KEY(TblFicha_idFicha)
+ADD FOREIGN KEY(TblFicha_IdFicha)
 REFERENCES TblFicha(IdFicha);
 
 ALTER TABLE TblAnuncio
-ADD FOREIGN KEY(TblUsuario_idUsu)
-REFERENCES TblUsuario(IdUsu);
+ADD FOREIGN KEY(TblUsuario_UsuNumeroID)
+REFERENCES TblUsuario(UsuNumeroID);
