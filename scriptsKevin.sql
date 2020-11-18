@@ -40,33 +40,33 @@ create table TblUsuario(
 
 
 create table TblTipDocUsu_TblUsuario(
-    IdTipDoc int(5) auto_increment,
+    IdTipDoc int(5) auto_increment primary key,
     TipDocIdentificacion varchar(30) not null
 
 );
 create table TblTelefono_TblUsuario(
 
-    IdTel int(5) auto_increment,
+    IdTel int(5) auto_increment primary key,
     TelUsuario varchar(30) not null
 
 );
 
 create table TblRol(
 
-    IdRol int(5) auto_increment,
+    IdRol int(5) auto_increment primary key,
     RolNombre varchar(30)not null
 
 );
 
 create table TblEstado(
 
-    IdEst int(5) auto_increment,
+    IdEst int(5) auto_increment primary key,
     EstNombre varchar(30) not null
 
 );
 create table TblAprendizFicha(
 
-    IdAprFic int(5) auto_increment,
+    IdAprFic int(5) auto_increment primary key,
     IdAprFicClave varchar(45) not null,
     TblFicha_IdFicha int(5)not null,
     TblEstado_IdEst int(5)not null,
@@ -78,14 +78,14 @@ create table TblAprendizFicha(
 
 create table TblAcceso(
 
-    IdAcc  int(5) auto_increment,
+    IdAcc  int(5) auto_increment primary key,
     AccIngresos int(10) not null
 
 );
 
 create table TblProgramaFormacion(
 
-    IdProFor int(5) auto_increment,
+    IdProFor int(5) auto_increment primary key,
     ProForVersion varchar(45) not null,
     ProForDuracion varchar(45) not null,
     ProForCodPrograma varchar(45) not null,
@@ -98,7 +98,7 @@ create table TblProgramaFormacion(
 
 create table TblTipoPrograma_TblProgramaFormacion(
 
-    IdTipPrograma int(5) auto_increment
+    IdTipPrograma int(5) auto_increment primary key,
     TipPrograma varchar(45) not null
 
 );
