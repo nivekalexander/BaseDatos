@@ -1,75 +1,68 @@
-CREATE TABLE TblFases_TblMaterialApoyo(
-    IdFases	Int(5) auto_increment PRIMARY KEY,
-    FasNombre Varchar(45) NOT NULL
+CREATE TABLE tbl_fases_material_apoyo(
+    fma_id	   Int(10) auto_increment PRIMARY KEY,
+    fma_nombre Varchar(45) NOT NULL
 );
 
-CREATE TABLE TblMaterialApoyo(
-    IdMaterialApoyo	Int(5) auto_increment PRIMARY KEY,
-    MatApoTitulo	Varchar(45) NOT NULL,
-    MatApoFechaPublicacion	Date NOT NULL,	
-    MatApoDescripcion	Varchar(255) NULL,
-    TblFases_TblMaterialApoyo_IdFases	Int(5) NOT NULL
+CREATE TABLE tbl_material_apoyo(
+    map_id	    Int(10) auto_increment PRIMARY KEY,
+    map_titulo	Varchar(45) NOT NULL,
+    map_fchpub	Date NOT NULL,	
+    map_descrp	Varchar(255) NULL,
+    map_fmaid	Int(10) NOT NULL
 );
 
-CREATE TABLE TblMaterialApoyo_TblFicha(
-    IdMatApoFic	Int(5) auto_increment PRIMARY KEY,
-    TblMaterialApoyo_IdMaterialApoyo Int(5) NOT NULL,
-    TblFicha_IdFicha Int(5) NOT NULL
+CREATE TABLE tbl_material_apoyo_ficha(
+    maf_id	  Int(10) auto_increment PRIMARY KEY,
+    maf_mapid Int(5) NOT NULL,
+    maf_ficid Int(5) NOT NULL
 );
 
-CREATE TABLE TblFicha(
-    IdFicha	Int(5) auto_increment PRIMARY KEY,
-    FicFechaInicio	Date NOT NULL,	
-    FicFechaFin	Date NOT NULL,	
-    FicNumeroFicha	Varchar(45) NOT NULL,
-    TblProgramaFormacion_IdProFor Int(5) NOT NULL,
-    TblTipoJornada_TblFicha_IdTipJor Int(5) NOT NULL,
-    TblModalidad_TblFicha_IdMod Int(5) NOT NULL,
-    TblTipoOferta_TblFicha_IdTipOfe Int(5) NOT NULL
+CREATE TABLE tbl_ficha(
+  	fic_id 	 		int(10) NOT NULL AUTO_INCREMENT,
+  	fic_codigo		VARCHAR(60) NOT NULL,
+  	fic_progrm		VARCHAR(60) NOT NULL,
+  	fic_abrvtr		VARCHAR(10) NOT NULL,
+	fic_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	fic_fchupd		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,	
+	PRIMARY KEY 	(fic_id)
+ );
+
+CREATE TABLE tbl_tipo_jornada_ficha(
+    tjf_id     Int(10) auto_increment PRIMARY KEY,
+    tjf_nombre Varchar(45) NOT NULL
 );
 
-CREATE TABLE TblTipoJornada_TblFicha(
-    IdTipJor Int(5) auto_increment PRIMARY KEY,
-    TipJorNombre Varchar(45) NOT NULL
+CREATE TABLE tbl_modalidad_ficha(
+    mfi_id	    Int(10) auto_increment PRIMARY KEY,
+    mfi_nombre	Varchar(45) NOT NULL
 );
 
-CREATE TABLE TblModalidad_TblFicha(
-    IdMod	Int(5) auto_increment PRIMARY KEY,
-    ModNombre	Varchar(45) NOT NULL
+CREATE TABLE tbl_tipo_oferta_ficha(
+    tof_id	     Int(10) auto_increment PRIMARY KEY,
+    tof_nombre   Varchar(45) NOT NULL
 );
 
-CREATE TABLE TblTipoOferta_TblFicha(
-    IdTipOfe	Int(5) auto_increment PRIMARY KEY,
-    TipOfeNombre	Varchar(45) NOT NULL
+CREATE TABLE tbl_horario(
+    hor_id	Int(10) auto_increment PRIMARY KEY,
+    hor_triini	Date NOT NULL,		
+    hor_trifin	Date NOT NULL,
+    hor_trinum	Int(10) NOT NULL,
+    hor_ficid	Int(10) NOT NULL
 );
 
-CREATE TABLE TblHorario(
-    IdHorario	Int(5) auto_increment PRIMARY KEY,
-    HorTrimestreInicio	Date NOT NULL,		
-    HorTrimestreFin	Date NOT NULL,
-    HorTrimestreNum	Int(5) NOT NULL,
-    TblFicha_IdFicha	Int(5) NOT NULL
-);
-
-CREATE TABLE TblAnuncio(
-    IdAnu	Int(5) auto_increment PRIMARY KEY,
-    AnuTitulo	Varchar(45) NOT NULL,
-    AnuDescripcion	Varchar(255) NULL,
-    AnuFechaCreacion	Date NOT NULL,	
-    AnuFechaFIn	Date	NOT NULL,
-    TblDisponibilidad_IdDis	Int(5) NOT NULL,
-    TblFicha_IdFicha	Int(5) NOT NULL,
-    TblUsuario_UsuNumeroID	Int(15) NOT NULL
-);
-
-CREATE TABLE TblDisponibilidad(
-    IdDis	Int(5) auto_increment PRIMARY KEY,
-    DisTipo	Varchar(45) NOT NULL
+CREATE TABLE tbl_anuncio(
+    anu_id	    Int(10) auto_increment PRIMARY KEY,
+    anu_titulo	Varchar(45) NOT NULL,
+    anu_descrp	Varchar(255) NULL,
+    anu_fchcrt	Date NOT NULL,	
+    anu_fchfin	Date NOT NULL,
+    anu_ficid	Int(10) NOT NULL,
+    anu_usuid	Int(10) NOT NULL
 );
 
 /* AÑADIR LLAVES FORANEAS (HACER DESPUES DE CREAR TODAS LAS TABLAS) */ 
 
-ALTER TABLE TblMaterialApoyo
+ALTER TABLE tbl_material_apoyo
 ADD FOREIGN KEY(TblFases_TblMaterialApoyo_IdFases)
 REFERENCES TblFases_TblMaterialApoyo(IdFases);
 
