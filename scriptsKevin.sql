@@ -22,21 +22,32 @@ TblForo_IdForo int(5)
 
 
 
-create table TblUsuario(
+CREATE TABLE tbl_usuario
+  (
+  	usu_id 	 		int(10) NOT NULL AUTO_INCREMENT,
+	usu_usuari		varchar(60) NOT NULL,
+	usu_passwd		varchar(32) NOT NULL,
+	usu_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	usu_fchupd		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	usu_ficid		int(10) NOT NULL,
+	usu_perid		int(10) NOT NULL,
+	PRIMARY KEY 	(usu_id)
+  );
 
-    UsuNumeroID int(15) not null primary key,
-    UsuFechaCreación date,
-    UsuNombre1 varchar(45) not null,
-    UsuNombre2 varchar(45) not null,
-    UsuApellido1 varchar(45) not null,
-    UsuApellido2 varchar(45) not null,
-    UsuClave varchar(75) not null,
-    TblEstado_IdEst int(5) not null,
-    TblRol_IdRol int(5) not null,
-    TblTelefono_TblUsuario_IdTel int(5) not null,
-    TblTipDocUsu_TblUsuario_IdTipDoc int(5) not null
-
-);
+CREATE TABLE tbl_persona
+  (	
+	per_id 	 		int(10) NOT NULL AUTO_INCREMENT,
+	per_nombre		varchar(60) NOT NULL,
+	per_aplldo		varchar(60) NOT NULL,
+	per_fchnac		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	per_dirccn		varchar(99) NOT NULL,
+	per_correo		varchar(99) NOT NULL,
+	per_telfno		varchar(20) NOT NULL,
+	per_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	per_fchupd		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	per_areid		int(10) NOT NULL,
+	PRIMARY KEY 	(per_id)
+  );
 
 
 create table TblTipDocUsu_TblUsuario(
@@ -83,9 +94,9 @@ create table TblAcceso(
 
 );
 
-create table TblProgramaFormacion(
+create table tbl_programa_formacion(
 
-    IdProFor int(5) auto_increment primary key,
+    pfo_id int(5) auto_increment primary key,
     ProForVersion varchar(45) not null,
     ProForDuracion varchar(45) not null,
     ProForCodPrograma varchar(45) not null,
