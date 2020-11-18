@@ -13,8 +13,8 @@ CREATE TABLE tbl_material_apoyo(
 
 CREATE TABLE tbl_material_apoyo_ficha(
     maf_id	  Int(10) auto_increment PRIMARY KEY,
-    maf_mapid Int(5) NOT NULL,
-    maf_ficid Int(5) NOT NULL
+    maf_mapid Int(10) NOT NULL,
+    maf_ficid Int(10) NOT NULL
 );
 
 CREATE TABLE tbl_ficha(
@@ -24,6 +24,10 @@ CREATE TABLE tbl_ficha(
   	fic_abrvtr		VARCHAR(10) NOT NULL,
 	fic_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	fic_fchupd		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,	
+    fic_tjfid       int(10) NOT NULL,
+    fic_mfiid       int(10) NOT NULL,
+    fic_tofid       int(10) NOT NULL,
+    fic_pfoid       int(10) NOT NULL,
 	PRIMARY KEY 	(fic_id)
  );
 
@@ -63,45 +67,41 @@ CREATE TABLE tbl_anuncio(
 /* AÑADIR LLAVES FORANEAS (HACER DESPUES DE CREAR TODAS LAS TABLAS) */ 
 
 ALTER TABLE tbl_material_apoyo
-ADD FOREIGN KEY(TblFases_TblMaterialApoyo_IdFases)
-REFERENCES TblFases_TblMaterialApoyo(IdFases);
+ADD FOREIGN KEY(map_fmaid)
+REFERENCES tbl_fases_material_apoyo(fma_id);
 
-ALTER TABLE TblMaterialApoyo_TblFicha
-ADD FOREIGN KEY(TblMaterialApoyo_IdMaterialApoyo)
-REFERENCES TblMaterialApoyo(IdMaterialApoyo);
+ALTER TABLE tbl_material_apoyo_ficha
+ADD FOREIGN KEY(maf_mapid)
+REFERENCES tbl_material_apoyo(map_id);
 
-ALTER TABLE TblMaterialApoyo_TblFicha
-ADD FOREIGN KEY(TblFicha_IdFicha)
-REFERENCES TblFicha(IdFicha);
+ALTER TABLE tbl_material_apoyo_ficha
+ADD FOREIGN KEY(maf_ficid)
+REFERENCES tbl_ficha(fic_id);
 
-ALTER TABLE TblFicha
-ADD FOREIGN KEY(TblProgramaFormacion_IdProFor)
-REFERENCES TblProgramaFormacion(IdProFor);
+ALTER TABLE tbl_ficha
+ADD FOREIGN KEY(fic_pfoid)
+REFERENCES tbl_programa_formacion(pfo_id);
 
-ALTER TABLE TblFicha
-ADD FOREIGN KEY(TblTipoJornada_TblFicha_IdTipJor)
-REFERENCES TblTipoJornada_TblFicha(IdTipJor);
+ALTER TABLE tbl_ficha
+ADD FOREIGN KEY(fic_tjfid)
+REFERENCES tbl_tipo_jornada_ficha(tjf_id);
 
-ALTER TABLE TblFicha
-ADD FOREIGN KEY(TblModalidad_TblFicha_IdMod)
-REFERENCES TblModalidad_TblFicha(IdMod);
+ALTER TABLE tbl_ficha
+ADD FOREIGN KEY(fic_mfiid)
+REFERENCES tbl_modalidad_ficha(mfi_id);
 
-ALTER TABLE TblFicha
-ADD FOREIGN KEY(TblTipoOferta_TblFicha_IdTipOfe)
-REFERENCES TblTipoOferta_TblFicha(IdTipOfe);
+ALTER TABLE tbl_ficha
+ADD FOREIGN KEY(fic_tofid)
+REFERENCES tbl_tipo_oferta_ficha(tof_id);
 
-ALTER TABLE TblHorario
-ADD FOREIGN KEY(TblFicha_IdFicha)
-REFERENCES TblFicha(IdFicha);
+ALTER TABLE tbl_horario
+ADD FOREIGN KEY(hor_ficid)
+REFERENCES tbl_ficha(fic_id);
 
-ALTER TABLE TblAnuncio
-ADD FOREIGN KEY(TblDisponibilidad_IdDis)
-REFERENCES TblDisponibilidad(IdDis);
+ALTER TABLE tbl_anuncio
+ADD FOREIGN KEY(anu_ficid)
+REFERENCES tbl_ficha(fic_id);
 
-ALTER TABLE TblAnuncio
-ADD FOREIGN KEY(TblFicha_IdFicha)
-REFERENCES TblFicha(IdFicha);
-
-ALTER TABLE TblAnuncio
-ADD FOREIGN KEY(TblUsuario_UsuNumeroID)
-REFERENCES TblUsuario(UsuNumeroID);
+ALTER TABLE tbl_anuncio
+ADD FOREIGN KEY(anu_usuid)
+REFERENCES tbl_usuario(usu_id);
