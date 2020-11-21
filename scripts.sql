@@ -1,3 +1,39 @@
+/*
+`tbl_login`			-->
+`tbl_usuario`		-->
+`tbl_auditoria`		-->
+
+tbl_usuarioficha
+tbl_rol
+
+`tbl_area`			--> 2
+`tbl_ficha`			--> 2
+`tbl_modulo`		--> 2
+`tbl_fase`			--> 2
+
+`tbl_persona`		--> 4
+`tbl_foro`			--> 4
+`tbl_detalleforo`	-->	4
+
+`tbl_sede`			--> 5
+`tbl_ciudad`		--> 5
+`tbl_departamento`	--> 5
+`tbl_pais`			--> 5
+
+`tbl_tipoid`		--> 6
+`tbl_estado`		--> 6
+`tbl_anuncios`		--> 6
+		
+`tbl_jornada`		--> 3
+`tbl_modalidad`		--> 3
+`tbl_oferta`		--> 3
+`tbl_programa`		--> 3
+		
+`tbl_horario`			--> 1
+`tbl_documentos`		--> 1
+`tbl_documentosficha`	--> 1
+*/
+
 CREATE TABLE tbl_fases_material_apoyo(
     fma_id	   Int(10) auto_increment PRIMARY KEY,
     fma_nombre Varchar(45) NOT NULL
