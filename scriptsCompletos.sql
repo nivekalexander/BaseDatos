@@ -34,8 +34,8 @@ CREATE TABLE tbl_materialapoyo(
 );
 
 CREATE TABLE tbl_noticia (
-    not_id int(10) NOT NULL,
-    not_fech timestamp NOT NULL DEFAULT current_timestamp(),
+    not_id int(10) PRIMARY KEY AUTO_INCREMENT,
+    not_fech DATE NOT NULL DEFAULT CURRENT_DATE(),
     not_url varchar(500) NOT NULL
 );
 
@@ -154,6 +154,7 @@ CREATE TABLE tbl_estado(
 
 CREATE TABLE tbl_aprendizficha(
     afi_id     int(10) auto_increment primary key,
+    afi_usu    varchar (150) not null,
     afi_passwd varchar(45) not null,
     afi_ficid  int(10)not null,
     afi_estid  int(10)not null,
@@ -164,9 +165,8 @@ CREATE TABLE tbl_programaformacion(
     pfo_id     int(10) auto_increment primary key,
     pfo_versn varchar(45) not null,
     pfo_duracn varchar(45) not null,
-    pfo_codpro varchar(45) not null,
 	pfo_abrvtr	VARCHAR(10) NOT NULL,
-    pfo_nompro varchar(45) not null,
+    pfo_nompro varchar(500) not null,
     pfo_estid  int(10)not null,
     pfo_tprid  int(10) not null
 );
@@ -243,13 +243,17 @@ references tbl_foro(for_id);
 
 alter table tbl_respuesta
 add foreign key (res_comid)
-references tbl_foro(for_id);
+references tbl_comentario(com_id);
 
 /*tbl_usuario*/
 
 alter table tbl_usuario
 add foreign key (usu_estid)
 references tbl_estado(est_id);
+
+alter table tbl_usuario
+add foreign key (usu_tipid)    /*New*/
+references tbl_tipoid(tip_id);
 
 alter table tbl_usuario
 add foreign key (usu_rolid)
@@ -287,25 +291,25 @@ references tbl_tipoprograma(tpr_id);
 
 
 INSERT INTO tbl_estado (est_nombre)
-VALUES (Activo),(Inactivo);
+VALUES ('Activo'),('Inactivo');
 
 INSERT INTO tbl_fases (fas_nombre)
-VALUES (Análisis),(Planeación),(Planeación),(Planeación);
+VALUES ('Análisis'),('Planeación'),('Planeación'),('Planeación');
 
 INSERT INTO tbl_modalidad (mod_nombre)
-VALUES (Presencial),(Virtual);
+VALUES ('Presencial'),('Virtual');
 
 INSERT INTO tbl_rol (rol_nombre)
-VALUES (Administración),(Instructor),(Aprendiz);
+VALUES ('Administración'),('Instructor'),('Aprendiz');
 
 INSERT INTO tbl_tipoid (tip_idntfc)
-VALUES (C.C),(C.E),(T.I);
+VALUES ('C.C'),('C.E'),('T.I');
 
 INSERT INTO tbl_tipojornada (tij_nombre)
-VALUES (Diurna),(Nocturna),(Mixta);
+VALUES ('Diurna'),('Nocturna'),('Mixta');
 
 INSERT INTO tbl_tipooferta (tof_nombre)
-VALUES (Abierta),(Cerrada);
+VALUES ('Abierta'),('Cerrada');
 
 INSERT INTO tbl_tipoprograma (tpr_nombre)
-VALUES (Técnico),(Tecnólogo),(Especialización);
+VALUES ('Técnico'),('Tecnólogo'),('Especialización');
