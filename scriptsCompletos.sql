@@ -1,23 +1,6 @@
-/*
-`tbl_login`			--> 
-`tbl_usuario`		-->
-`tbl_usuarioficha`  
-`tbl_rol`
-`tbl_ficha`			--> 2
-`tbl_fases`			--> 2
-`tbl_foro`			--> 4
-`tbl_tipoid`		--> 6
-`tbl_estado`		--> 6
-`tbl_anuncio`		--> 6
-`tbl_jornada`		--> 3
-`tbl_modalidad`		--> 3
-`tbl_oferta`		--> 3
-`tbl_programa`		--> 3
-`tbl_horario`			--> 1
-`tbl_materialapoyo`		--> 1
-`tbl_documentosficha`	--> 1
-*/
 CREATE DATABASE proyectointranetpruebas;
+
+USE proyectointranetpruebas; 
 
 CREATE TABLE tbl_fases(
     fas_id	   Int(10) auto_increment PRIMARY KEY,
