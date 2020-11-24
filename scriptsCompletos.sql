@@ -27,6 +27,7 @@ tbl_rol
 `tbl_materialapoyo`		--> 1
 `tbl_documentosficha`	--> 1
 */
+CREATE DATABASE proyectointranetpruebas;
 
 CREATE TABLE tbl_fases(
     fas_id	   Int(10) auto_increment PRIMARY KEY,
