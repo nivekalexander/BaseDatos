@@ -36,6 +36,7 @@ CREATE TABLE tbl_fases(
 
 CREATE TABLE tbl_materialapoyo(
     map_id	    Int(10) auto_increment PRIMARY KEY,
+    
     map_titulo	Varchar(45) NOT NULL,
     map_fecpub	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     map_descrp	Varchar(255) NULL,
@@ -277,3 +278,14 @@ references tbl_estado(est_id);
 alter table tbl_programaformacion
 add foreign key (pfo_tprid)
 references tbl_tipoprograma(tpr_id);
+
+/*tbl_login*/
+
+alter table tbl_login
+add foreign key (log_usuid)
+references tbl_usuario(usu_id);
+
+alter table tbl_login
+add foreign key (log_ficid)
+references tbl_ficha(fic_id);
+
