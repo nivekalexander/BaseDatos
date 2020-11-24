@@ -315,5 +315,5 @@ VALUES (NULL, 'ref435123', '2 años', 'tadsi', 'tecnología en análisis de sist
 INSERT INTO `tbl_ficha` (`fic_id`, `fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `fic_modid`, `fic_tofid`, `fic_pfoid`) 
 VALUES (NULL, '1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
 
-INSERT INTO `tbl_usuario` (`usu_id`, `usu_nombre`, `usu_aplldo`, `usu_passwd`, `usu_correo`, `usu_ficid`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
-VALUES (NULL, 'kevin alexander', 'garcia romero', '1234', 'asdasdasdasdas@gmail.com', '1', '1', '1', '1');
+INSERT INTO `tbl_usuario` (`usu_id`, `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_ficid`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
+VALUES (NULL, 'kevin alexander', 'garcia romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1', '1', '1', '1');
