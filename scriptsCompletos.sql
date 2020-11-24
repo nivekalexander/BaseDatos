@@ -4,7 +4,7 @@
 `tbl_usuarioficha`  
 `tbl_rol`
 `tbl_ficha`			--> 2
-`tbl_fase`			--> 2
+`tbl_fases`			--> 2
 `tbl_foro`			--> 4
 `tbl_tipoid`		--> 6
 `tbl_estado`		--> 6
@@ -284,3 +284,28 @@ references tbl_estado(est_id);
 alter table tbl_programaformacion
 add foreign key (pfo_tprid)
 references tbl_tipoprograma(tpr_id);
+
+
+INSERT INTO tbl_estado (est_nombre)
+VALUES (Activo),(Inactivo);
+
+INSERT INTO tbl_fases (fas_nombre)
+VALUES (Análisis),(Planeación),(Planeación),(Planeación);
+
+INSERT INTO tbl_modalidad (mod_nombre)
+VALUES (Presencial),(Virtual);
+
+INSERT INTO tbl_rol (rol_nombre)
+VALUES (Administración),(Instructor),(Aprendiz);
+
+INSERT INTO tbl_tipoid (tip_idntfc)
+VALUES (C.C),(C.E),(T.I);
+
+INSERT INTO tbl_tipojornada (tij_nombre)
+VALUES (Diurna),(Nocturna),(Mixta);
+
+INSERT INTO tbl_tipooferta (tof_nombre)
+VALUES (Abierta),(Cerrada);
+
+INSERT INTO tbl_tipoprograma (tpr_nombre)
+VALUES (Técnico),(Tecnólogo),(Especialización);
