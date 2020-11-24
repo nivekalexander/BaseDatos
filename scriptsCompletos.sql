@@ -68,7 +68,7 @@ CREATE TABLE tbl_horario(
 CREATE TABLE tbl_anuncio(
     anu_id	    Int(10) auto_increment PRIMARY KEY,
     anu_titulo	Varchar(45) NOT NULL,
-    anu_descrp	Varchar(255) NULL,
+    anu_descrp	Varchar(500) NULL,
     anu_feccrn	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     anu_fecfn	Date NOT NULL,
     anu_ficid	Int(10) NOT NULL,
@@ -316,7 +316,7 @@ INSERT INTO `tbl_ficha` (`fic_id`, `fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic
 VALUES (NULL, '1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
 
 INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_ficid`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
-VALUES ('kevin alexander', 'garcia romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1', '1', '1', '1');
+VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1', '1', '1', '1');
 ('Franklin', 'German Quihuang', '100764321', '1234', 'asdasdasdas@gmail.com', '1', '1', '1', '1'), 
 ('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1');
 ('Camilo', 'Carabali Balanta', '1003214567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1');
