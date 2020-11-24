@@ -1,28 +1,18 @@
 /*
-`tbl_login`			-->
+`tbl_login`			--> 
 `tbl_usuario`		-->
-
-
-tbl_usuarioficha
-tbl_rol
-
-
+`tbl_usuarioficha`  
+`tbl_rol`
 `tbl_ficha`			--> 2
 `tbl_fase`			--> 2
-
-
 `tbl_foro`			--> 4
-
-
 `tbl_tipoid`		--> 6
 `tbl_estado`		--> 6
 `tbl_anuncio`		--> 6
-		
 `tbl_jornada`		--> 3
 `tbl_modalidad`		--> 3
 `tbl_oferta`		--> 3
 `tbl_programa`		--> 3
-		
 `tbl_horario`			--> 1
 `tbl_materialapoyo`		--> 1
 `tbl_documentosficha`	--> 1
@@ -39,7 +29,14 @@ CREATE TABLE tbl_materialapoyo(
     map_titulo	Varchar(45) NOT NULL,
     map_fecpub	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     map_descrp	Varchar(255) NULL,
+    map_ArchArl Varchar(500) NOT NULL,
     map_fasid	Int(10) NOT NULL
+);
+
+CREATE TABLE tbl_noticia (
+    not_id int(10) NOT NULL,
+    not_fech timestamp NOT NULL DEFAULT current_timestamp(),
+    not_url varchar(500) NOT NULL
 );
 
 CREATE TABLE tbl_materialapoyo_ficha(
@@ -114,14 +111,14 @@ CREATE TABLE tbl_foro(
 
 CREATE TABLE tbl_comentario(
     com_id     int(10) auto_increment primary key,
-    com_respst Varchar(45) no null,
+    com_respst Varchar(45) not null,
     com_fchcrt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     com_perprt Varchar(45),
     com_forid  int(10)
 );
 CREATE TABLE tbl_respuesta(
     res_id     int(10) auto_increment primary key,
-    res_respst Varchar(45) no null,
+    res_respst Varchar(45) not null,
     res_fchcrt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     res_perprt Varchar(45),
 	res_comid     int(10)
@@ -136,7 +133,7 @@ CREATE TABLE tbl_usuario(
 	usu_ficid		int(10) NOT NULL,
     usu_rolid       int(10) NOT NULL,
     usu_estid       int(10) NOT NULL,
-    usu_tipid       int(10) NOT NULL,
+    usu_tipid       int(10) NOT NULL
 	
 );
 
@@ -179,6 +176,8 @@ CREATE TABLE tbl_tipoprograma(
     tpr_id     int(10) auto_increment primary key,
     tpr_nombre varchar(45) not null
 );
+
+
 /* AÑADIR LLAVES FORANEAS (HACER DESPUES DE CREAR TODAS LAS TABLAS) */ 
 
 /*Material Apoyo*/ 
@@ -194,6 +193,8 @@ ALTER TABLE tbl_materialapoyo_ficha
 ADD FOREIGN KEY(maf_ficid)
 REFERENCES tbl_ficha(fic_id);
 
+/*Material ficha*/
+ 
 ALTER TABLE tbl_ficha
 ADD FOREIGN KEY(fic_pfoid)
 REFERENCES tbl_programaformacion(pfo_id);
@@ -210,9 +211,13 @@ ALTER TABLE tbl_ficha
 ADD FOREIGN KEY(fic_tofid)
 REFERENCES tbl_tipooferta(tof_id);
 
+/*Material horario*/
+
 ALTER TABLE tbl_horario
 ADD FOREIGN KEY(hor_ficid)
 REFERENCES tbl_ficha(fic_id);
+
+/*Material anuncio*/
 
 ALTER TABLE tbl_anuncio
 ADD FOREIGN KEY(anu_ficid)
@@ -233,11 +238,13 @@ references tbl_ficha(fic_id);
 alter table tbl_comentario
 add foreign key (com_forid)
 references tbl_foro(for_id);
+
 /*tbl_respuesta*/
 
 alter table tbl_respuesta
 add foreign key (res_comid)
 references tbl_foro(for_id);
+
 /*tbl_usuario*/
 
 alter table tbl_usuario
