@@ -68,7 +68,7 @@ CREATE TABLE tbl_horario(
 CREATE TABLE tbl_anuncio(
     anu_id	    Int(10) auto_increment PRIMARY KEY,
     anu_titulo	Varchar(45) NOT NULL,
-    anu_descrp	Varchar(500) NULL,
+    anu_descrp	Varchar(2000) NULL,
     anu_feccrn	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     anu_fecfn	Date NOT NULL,
     anu_ficid	Int(10) NOT NULL,
@@ -89,20 +89,20 @@ CREATE TABLE tbl_foro(
     for_titulo Varchar(45) not null,
     for_fchfin DATE NOT NULL DEFAULT CURRENT_DATE(),
     for_fchini Date,
-    for_descrp Varchar(600) not null,
+    for_descrp Varchar(2000) not null,
     for_ficid  int(10) not null
 );
 
 CREATE TABLE tbl_comentario(
     com_id     int(10) auto_increment primary key,
-    com_respst Varchar(45) not null,
+    com_respst Varchar(2000) not null,
     com_fchcrt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     com_perprt Varchar(45),
     com_forid  int(10)
 );
 CREATE TABLE tbl_respuesta(
     res_id     int(10) auto_increment primary key,
-    res_respst Varchar(45) not null,
+    res_respst Varchar(2000) not null,
     res_fchcrt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     res_perprt Varchar(45),
 	res_comid     int(10)
