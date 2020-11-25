@@ -32,7 +32,7 @@ CREATE TABLE tbl_materialapoyo_ficha(
 CREATE TABLE tbl_ficha(
   	fic_id 	 		int(10) NOT NULL AUTO_INCREMENT,
   	fic_codigo		VARCHAR(60) NOT NULL,
-    fic_feccrn      DATE NOT NULL DEFAULT CURRENT_DATE(),
+    fic_feccrn      date,
     fic_fecfn       date,
     fic_tijid       int(10) NOT NULL,
     fic_modid       int(10) NOT NULL,
