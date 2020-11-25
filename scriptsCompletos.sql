@@ -9,6 +9,7 @@ CREATE TABLE tbl_fases(
 
 CREATE TABLE tbl_materialapoyo(
     map_id	    Int(10) auto_increment PRIMARY KEY,
+    
     map_titulo	Varchar(45) NOT NULL,
     map_fecpub	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     map_descrp	Varchar(255) NULL,
@@ -67,7 +68,7 @@ CREATE TABLE tbl_horario(
 CREATE TABLE tbl_anuncio(
     anu_id	    Int(10) auto_increment PRIMARY KEY,
     anu_titulo	Varchar(45) NOT NULL,
-    anu_descrp	Varchar(255) NULL,
+    anu_descrp	Varchar(2000) NULL,
     anu_feccrn	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     anu_fecfn	Date NOT NULL,
     anu_ficid	Int(10) NOT NULL,
@@ -88,20 +89,20 @@ CREATE TABLE tbl_foro(
     for_titulo Varchar(45) not null,
     for_fchfin DATE NOT NULL DEFAULT CURRENT_DATE(),
     for_fchini Date,
-    for_descrp Varchar(600) not null,
+    for_descrp Varchar(2000) not null,
     for_ficid  int(10) not null
 );
 
 CREATE TABLE tbl_comentario(
     com_id     int(10) auto_increment primary key,
-    com_respst Varchar(45) not null,
+    com_respst Varchar(2000) not null,
     com_fchcrt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     com_perprt Varchar(45),
     com_forid  int(10)
 );
 CREATE TABLE tbl_respuesta(
     res_id     int(10) auto_increment primary key,
-    res_respst Varchar(45) not null,
+    res_respst Varchar(2000) not null,
     res_fchcrt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     res_perprt Varchar(45),
 	res_comid     int(10)
@@ -111,8 +112,9 @@ CREATE TABLE tbl_usuario(
 	usu_id 	 		int(10) AUTO_INCREMENT PRIMARY KEY ,
 	usu_nombre		varchar(60) NOT NULL,
 	usu_aplldo		varchar(60) NOT NULL,
-	usu_passwd		varchar(32) NOT NULL,
+    usu_numdnt      INT(15) NOT NULL ;
 	usu_correo		varchar(99) NOT NULL,
+    usu_passwd		varchar(32) NOT NULL,
 	usu_ficid		int(10) NOT NULL,
     usu_rolid       int(10) NOT NULL,
     usu_estid       int(10) NOT NULL,
@@ -272,6 +274,16 @@ alter table tbl_programaformacion
 add foreign key (pfo_tprid)
 references tbl_tipoprograma(tpr_id);
 
+/*tbl_login*/
+
+alter table tbl_login
+add foreign key (log_usuid)
+references tbl_usuario(usu_id);
+
+alter table tbl_login
+add foreign key (log_ficid)
+references tbl_ficha(fic_id);
+
 
 INSERT INTO tbl_estado (est_nombre)
 VALUES ('Activo'),('Inactivo');
@@ -296,3 +308,18 @@ VALUES ('Abierta'),('Cerrada');
 
 INSERT INTO tbl_tipoprograma (tpr_nombre)
 VALUES ('Técnico'),('Tecnólogo'),('Especialización');
+
+INSERT INTO `tbl_programaformacion` (`pfo_id`, `pfo_versn`, `pfo_duracn`, `pfo_abrvtr`, `pfo_nompro`, `pfo_estid`, `pfo_tprid`) 
+VALUES (NULL, 'ref435123', '2 años', 'tadsi', 'tecnología en análisis de sistemas', '1', '2');
+
+INSERT INTO `tbl_ficha` (`fic_id`, `fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `fic_modid`, `fic_tofid`, `fic_pfoid`) 
+VALUES (NULL, '1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
+
+INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_ficid`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
+VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1', '1', '1', '1');
+('Franklin', 'German Quihuang', '100764321', '1234', 'asdasdasdas@gmail.com', '1', '1', '1', '1'), 
+('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1');
+('Camilo', 'Carabali Balanta', '1003214567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1');
+
+INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficid`, `anu_usuid`) 
+VALUES (NULL, 'el queso es barato', 'este es un anuncio para informar lo barato que es el queso', '2020-11-24', '2020-11-30', '1', '1');
