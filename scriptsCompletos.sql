@@ -58,7 +58,7 @@ CREATE TABLE tbl_tipooferta(
 CREATE TABLE tbl_horario(
     hor_id	Int(10) auto_increment PRIMARY KEY,
     hor_url   Varchar(500) NOT NULL,
-    hor_triini DATE NOT NULL DEFAULT CURRENT_DATE(),		
+    hor_triini DATE NOT NULL,		
     hor_trifin	Date NOT NULL,
     hor_trinum	Int(10) NOT NULL,
     hor_ficid	Int(10) NOT NULL
@@ -283,7 +283,7 @@ INSERT INTO tbl_modalidad (mod_nombre)
 VALUES ('Presencial'),('Virtual');
 
 INSERT INTO tbl_rol (rol_nombre)
-VALUES ('Administración'),('Instructor'),('Aprendiz');
+VALUES ('Administrador'),('Instructor'),('Aprendiz');
 
 INSERT INTO tbl_tipoid (tip_idntfc)
 VALUES ('C.C'),('C.E'),('T.I');
