@@ -112,7 +112,7 @@ CREATE TABLE tbl_usuario(
 	usu_id 	 		int(10) AUTO_INCREMENT PRIMARY KEY ,
 	usu_nombre		varchar(60) NOT NULL,
 	usu_aplldo		varchar(60) NOT NULL,
-    usu_numdnt      INT(15) NOT NULL ;
+    usu_numdnt      INT(15) NOT NULL ,
 	usu_correo		varchar(99) NOT NULL,
     usu_passwd		varchar(32) NOT NULL,
 	usu_ficid		int(10) NOT NULL,
@@ -168,121 +168,121 @@ CREATE TABLE tbl_tipoprograma(
 /*Material Apoyo*/ 
 ALTER TABLE tbl_materialapoyo
 ADD FOREIGN KEY(map_fasid)
-REFERENCES tbl_fases(fas_id);
+REFERENCES tbl_fases(fas_id) on delete cascade on update cascade;
 
 ALTER TABLE tbl_materialapoyo_ficha
 ADD FOREIGN KEY(maf_mapid)
-REFERENCES tbl_materialapoyo(map_id);
+REFERENCES tbl_materialapoyo(map_id) on delete cascade on update cascade;
 
 ALTER TABLE tbl_materialapoyo_ficha
 ADD FOREIGN KEY(maf_ficid)
-REFERENCES tbl_ficha(fic_id);
+REFERENCES tbl_ficha(fic_id) on delete cascade on update cascade;
 
 /*Material ficha*/
  
 ALTER TABLE tbl_ficha
 ADD FOREIGN KEY(fic_pfoid)
-REFERENCES tbl_programaformacion(pfo_id);
+REFERENCES tbl_programaformacion(pfo_id) on delete cascade on update cascade;
 
 ALTER TABLE tbl_ficha
 ADD FOREIGN KEY(fic_tijid)
-REFERENCES tbl_tipojornada(tij_id);
+REFERENCES tbl_tipojornada(tij_id) on delete cascade on update cascade;
 
 ALTER TABLE tbl_ficha
 ADD FOREIGN KEY(fic_modid)
-REFERENCES tbl_modalidad(mod_id);
+REFERENCES tbl_modalidad(mod_id) on delete cascade on update cascade;
 
 ALTER TABLE tbl_ficha
 ADD FOREIGN KEY(fic_tofid)
-REFERENCES tbl_tipooferta(tof_id);
+REFERENCES tbl_tipooferta(tof_id) on delete cascade on update cascade;
 
 /*Material horario*/
 
 ALTER TABLE tbl_horario
 ADD FOREIGN KEY(hor_ficid)
-REFERENCES tbl_ficha(fic_id);
+REFERENCES tbl_ficha(fic_id) on delete cascade on update cascade;
 
 /*Material anuncio*/
 
 ALTER TABLE tbl_anuncio
 ADD FOREIGN KEY(anu_ficid)
-REFERENCES tbl_ficha(fic_id);
+REFERENCES tbl_ficha(fic_id) on delete cascade on update cascade;
 
 ALTER TABLE tbl_anuncio
 ADD FOREIGN KEY(anu_usuid)
-REFERENCES tbl_usuario(usu_id);
+REFERENCES tbl_usuario(usu_id) on delete cascade on update cascade;
 
 /*tbl_foro*/
  
 alter table tbl_foro
 add foreign key (for_ficid)
-references tbl_ficha(fic_id);
+references tbl_ficha(fic_id) on delete cascade on update cascade;
 
 /*tbl_comentario*/
 
 alter table tbl_comentario
 add foreign key (com_forid)
-references tbl_foro(for_id);
+references tbl_foro(for_id) on delete cascade on update cascade;
 
 /*tbl_respuesta*/
 
 alter table tbl_respuesta
 add foreign key (res_comid)
-references tbl_comentario(com_id);
+references tbl_comentario(com_id) on delete cascade on update cascade;
 
 /*tbl_usuario*/
 
 alter table tbl_usuario
 add foreign key (usu_estid)
-references tbl_estado(est_id);
+references tbl_estado(est_id) on delete cascade on update cascade;
 
 alter table tbl_usuario
 add foreign key (usu_tipid)    /*New*/
-references tbl_tipoid(tip_id);
+references tbl_tipoid(tip_id) on delete cascade on update cascade;
 
 alter table tbl_usuario
 add foreign key (usu_rolid)
-references tbl_rol(rol_id);
+references tbl_rol(rol_id) on delete cascade on update cascade;
 
 alter table tbl_usuario
 add foreign key (usu_ficid)
-references tbl_ficha(fic_id);
+references tbl_ficha(fic_id) on delete cascade on update cascade;
 
 
 /*tbl_aprendizficha*/
 
 alter table tbl_aprendizficha
 add foreign key (afi_ficid)
-references tbl_ficha(fic_id);
+references tbl_ficha(fic_id) on delete cascade on update cascade;
 
 alter table tbl_aprendizficha
 add foreign key (afi_estid)
-references tbl_estado(est_id);
+references tbl_estado(est_id) on delete cascade on update cascade;
 
 
 alter table tbl_aprendizficha
 add foreign key (afi_rolid)
-references tbl_rol(rol_id);
+references tbl_rol(rol_id) on delete cascade on update cascade;
 
 /*tbl_programaformacion*/
 
 alter table tbl_programaformacion
 add foreign key (pfo_estid)
-references tbl_estado(est_id);
+references tbl_estado(est_id) on delete cascade on update cascade;
 
 alter table tbl_programaformacion
 add foreign key (pfo_tprid)
-references tbl_tipoprograma(tpr_id);
+references tbl_tipoprograma(tpr_id) on delete cascade on update cascade;
 
 /*tbl_login*/
 
 alter table tbl_login
 add foreign key (log_usuid)
-references tbl_usuario(usu_id);
+references tbl_usuario(usu_id) on delete cascade on update cascade;
 
 alter table tbl_login
 add foreign key (log_ficid)
-references tbl_ficha(fic_id);
+references tbl_ficha(fic_id) on delete cascade on update cascade;
 
 
 INSERT INTO tbl_estado (est_nombre)
@@ -316,9 +316,9 @@ INSERT INTO `tbl_ficha` (`fic_id`, `fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic
 VALUES (NULL, '1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
 
 INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_ficid`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
-VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1', '1', '1', '1');
+VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1', '1', '1', '1'),
 ('Franklin', 'German Quihuang', '100764321', '1234', 'asdasdasdas@gmail.com', '1', '1', '1', '1'), 
-('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1');
+('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1'),
 ('Camilo', 'Carabali Balanta', '1003214567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1');
 
 INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficid`, `anu_usuid`) 
