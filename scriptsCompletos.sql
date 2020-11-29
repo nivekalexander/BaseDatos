@@ -9,12 +9,12 @@ CREATE TABLE tbl_fases(
 
 CREATE TABLE tbl_materialapoyo(
     map_id	    Int(10) auto_increment PRIMARY KEY,
-    
     map_titulo	Varchar(45) NOT NULL,
     map_fecpub	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     map_descrp	Varchar(255) NULL,
     map_ArchArl Varchar(500) NOT NULL,
-    map_fasid	Int(10) NOT NULL
+    map_fasid	Int(10) NOT NULL,
+    map_usuid   Int(10) NOT NULL
 );
 
 CREATE TABLE tbl_noticia (
@@ -173,7 +173,7 @@ REFERENCES tbl_fases(fas_id) on delete cascade on update cascade;
 
 
 ALTER TABLE tbl_materialapoyo
-ADD FOREIGN KEY(fic_usuid)
+ADD FOREIGN KEY(map_usuid)
 REFERENCES tbl_usuario(usu_id) on delete cascade on update cascade;
 
 /*Material Apoyo - Ficha*/ 
