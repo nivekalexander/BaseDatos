@@ -38,6 +38,7 @@ CREATE TABLE tbl_ficha(
     fic_modid       int(10) NOT NULL,
     fic_tofid       int(10) NOT NULL,
     fic_pfoid       int(10) NOT NULL,
+    fic_usuid       int(10) NOT NULL,
 	PRIMARY KEY 	(fic_id)
  );
 
@@ -169,6 +170,13 @@ CREATE TABLE tbl_tipoprograma(
 ALTER TABLE tbl_materialapoyo
 ADD FOREIGN KEY(map_fasid)
 REFERENCES tbl_fases(fas_id) on delete cascade on update cascade;
+
+
+ALTER TABLE tbl_materialapoyo
+ADD FOREIGN KEY(fic_usuid)
+REFERENCES tbl_usuario(usu_id) on delete cascade on update cascade;
+
+/*Material Apoyo - Ficha*/ 
 
 ALTER TABLE tbl_materialapoyo_ficha
 ADD FOREIGN KEY(maf_mapid)
