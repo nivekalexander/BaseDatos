@@ -26,11 +26,11 @@ CREATE TABLE tbl_noticia (
 CREATE TABLE tbl_materialapoyo_ficha(
     maf_id	  Int(10) auto_increment PRIMARY KEY,
     maf_mapid Int(10) NOT NULL,
-    maf_ficid Int(10) NOT NULL
+    maf_ficcodigo Int(10) NOT NULL
 );
 
 CREATE TABLE tbl_ficha(
-  	fic_id 	 		int(10) NOT NULL AUTO_INCREMENT,
+  	
   	fic_codigo		VARCHAR(60) NOT NULL,
     fic_feccrn      date,
     fic_fecfn       date,
@@ -39,7 +39,7 @@ CREATE TABLE tbl_ficha(
     fic_tofid       int(10) NOT NULL,
     fic_pfoid       int(10) NOT NULL,
     fic_usunumdnt       int(10) NOT NULL,
-	PRIMARY KEY 	(fic_id)
+	PRIMARY KEY 	(fic_codigo)
  );
 
 CREATE TABLE tbl_tipojornada(
@@ -63,7 +63,7 @@ CREATE TABLE tbl_horario(
     hor_triini DATE NOT NULL,		
     hor_trifin	Date NOT NULL,
     hor_trinum	Int(10) NOT NULL,
-    hor_ficid	Int(10) NOT NULL
+    hor_ficcodigo	Int(10) NOT NULL
 );
 
 CREATE TABLE tbl_anuncio(
@@ -72,7 +72,7 @@ CREATE TABLE tbl_anuncio(
     anu_descrp	Varchar(2000) NULL,
     anu_feccrn	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     anu_fecfn	Date NOT NULL,
-    anu_ficid	Int(10) NOT NULL,
+    anu_ficcodigo	Int(10) NOT NULL,
     anu_usunumdnt	Int(10) NOT NULL
 );
 
@@ -81,7 +81,7 @@ CREATE TABLE tbl_login(
     log_id 	 		int(10) NOT NULL AUTO_INCREMENT,
     log_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     log_usunumdnt		int(10) NOT NULL,
-    log_ficid		int(10) NOT NULL,
+    log_ficcodigo		int(10) NOT NULL,
     PRIMARY KEY 	(log_id)
 );
 
@@ -91,7 +91,7 @@ CREATE TABLE tbl_foro(
     for_fchfin DATE NOT NULL DEFAULT CURRENT_DATE(),
     for_fchini Date,
     for_descrp Varchar(2000) not null,
-    for_ficid  int(10) not null
+    for_ficcodigo  int(10) not null
 );
 
 CREATE TABLE tbl_comentario(
@@ -114,7 +114,7 @@ CREATE TABLE tbl_usuario(
 	usu_aplldo		varchar(60) NOT NULL,
 	usu_correo		varchar(99) NOT NULL,
     usu_passwd		varchar(32) NOT NULL,
-	usu_ficid		int(10) NOT NULL,
+	usu_ficcodigo		int(10) NOT NULL,
     usu_rolid       int(10) NOT NULL,
     usu_estid       int(10) NOT NULL,
     usu_tipid       int(10) NOT NULL
@@ -140,7 +140,7 @@ CREATE TABLE tbl_aprendizficha(
     afi_id     int(10) auto_increment primary key,
     afi_usu    varchar (150) not null,
     afi_passwd varchar(45) not null,
-    afi_ficid  int(10)not null,
+    afi_ficcodigo  int(10)not null,
     afi_estid  int(10)not null,
     afi_rolid  int(10)not null
 );
@@ -181,8 +181,8 @@ ADD FOREIGN KEY(maf_mapid)
 REFERENCES tbl_materialapoyo(map_id) on delete cascade on update cascade;
 
 ALTER TABLE tbl_materialapoyo_ficha
-ADD FOREIGN KEY(maf_ficid)
-REFERENCES tbl_ficha(fic_id) on delete cascade on update cascade;
+ADD FOREIGN KEY(maf_ficcodigo)
+REFERENCES tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 /*Material ficha*/
  
@@ -205,14 +205,14 @@ REFERENCES tbl_tipooferta(tof_id) on delete cascade on update cascade;
 /*Material horario*/
 
 ALTER TABLE tbl_horario
-ADD FOREIGN KEY(hor_ficid)
-REFERENCES tbl_ficha(fic_id) on delete cascade on update cascade;
+ADD FOREIGN KEY(hor_ficcodigo)
+REFERENCES tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 /*Material anuncio*/
 
 ALTER TABLE tbl_anuncio
-ADD FOREIGN KEY(anu_ficid)
-REFERENCES tbl_ficha(fic_id) on delete cascade on update cascade;
+ADD FOREIGN KEY(anu_ficcodigo)
+REFERENCES tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 ALTER TABLE tbl_anuncio
 ADD FOREIGN KEY(anu_usunumdnt)
@@ -221,8 +221,8 @@ REFERENCES tbl_usuario(usunumdnt) on delete cascade on update cascade;
 /*tbl_foro*/
  
 alter table tbl_foro
-add foreign key (for_ficid)
-references tbl_ficha(fic_id) on delete cascade on update cascade;
+add foreign key (for_ficcodigo)
+references tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 /*tbl_comentario*/
 
@@ -251,15 +251,15 @@ add foreign key (usu_rolid)
 references tbl_rol(rol_id) on delete cascade on update cascade;
 
 alter table tbl_usuario
-add foreign key (usu_ficid)
-references tbl_ficha(fic_id) on delete cascade on update cascade;
+add foreign key (usu_ficcodigo)
+references tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 
 /*tbl_aprendizficha*/
 
 alter table tbl_aprendizficha
-add foreign key (afi_ficid)
-references tbl_ficha(fic_id) on delete cascade on update cascade;
+add foreign key (afi_ficcodigo)
+references tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 alter table tbl_aprendizficha
 add foreign key (afi_estid)
@@ -287,8 +287,8 @@ add foreign key (log_usunumdnt)
 references tbl_usuario(usu_numdnt) on delete cascade on update cascade;
 
 alter table tbl_login
-add foreign key (log_ficid)
-references tbl_ficha(fic_id) on delete cascade on update cascade;
+add foreign key (log_ficcodigo)
+references tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 
 INSERT INTO tbl_estado (est_nombre)
@@ -312,20 +312,24 @@ VALUES ('Diurna'),('Nocturna'),('Mixta');
 INSERT INTO tbl_tipooferta (tof_nombre)
 VALUES ('Abierta'),('Cerrada');
 
+
 INSERT INTO tbl_tipoprograma (tpr_nombre)
 VALUES ('Técnico'),('Tecnólogo'),('Especialización');
 
 INSERT INTO `tbl_programaformacion` (`pfo_id`, `pfo_versn`, `pfo_duracn`, `pfo_abrvtr`, `pfo_nompro`, `pfo_estid`, `pfo_tprid`) 
 VALUES (NULL, 'ref435123', '2 años', 'tadsi', 'tecnología en análisis de sistemas', '1', '2');
 
-INSERT INTO `tbl_ficha` (`fic_id`, `fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `fic_modid`, `fic_tofid`, `fic_pfoid`) 
-VALUES (NULL, '1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
+INSERT INTO `tbl_ficha` (`fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `fic_modid`, `fic_tofid`, `fic_pfoid`) 
+VALUES ('1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
 
-INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_ficid`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
-VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1', '1', '1', '1'),
-('Franklin', 'German Quihuang', '100764321', '1234', 'asdasdasdas@gmail.com', '1', '1', '1', '1'), 
-('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1'),
-('Camilo', 'Carabali Balanta', '1003214567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1');
+INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_ficcodigo`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
+VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1907036', '1', '1', '1'),
+('Franklin', 'German Quihuang', '100764321', '1234', 'asdasdasdas@gmail.com', '1907036', '1', '1', '1'), 
+('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'asdasdasdasda@gmail.com', '1907036', '1', '1', '1'),
+('Camilo', 'Carabali Balanta', '1003214567', '1234', 'asdasdasdasda@gmail.com', '1907036', '1', '1', '1');
 
-INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficid`, `anu_usunumdnt`) 
-VALUES (NULL, 'el queso es barato', 'este es un anuncio para informar lo barato que es el queso', '2020-11-24', '2020-11-30', '1', '1');
+INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficcodigo`, `anu_usunumdnt`) 
+VALUES (NULL, 'el queso es barato', 'este es un anuncio para informar lo barato que es el queso', '2020-11-24', '2020-11-30', '1907036', '1004345279');
+
+INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficcodigo`, `anu_usunumdnt`) 
+VALUES (NULL, 'Las palomas vuelan', 'Las palomas solo saben volar,ates corrian pero la evolucion les dio alas', '2020-11-24', '2020-11-30', '1907036', '1001234567');
