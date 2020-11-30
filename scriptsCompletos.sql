@@ -14,7 +14,7 @@ CREATE TABLE tbl_materialapoyo(
     map_descrp	Varchar(255) NULL,
     map_archurl Varchar(500) NOT NULL,
     map_fasid	Int(10) NOT NULL,
-    map_usuid   Int(10) NOT NULL
+    map_usunumdnt  Int(10) NOT NULL
 );
 
 CREATE TABLE tbl_noticia (
@@ -38,7 +38,7 @@ CREATE TABLE tbl_ficha(
     fic_modid       int(10) NOT NULL,
     fic_tofid       int(10) NOT NULL,
     fic_pfoid       int(10) NOT NULL,
-    fic_usuid       int(10) NOT NULL,
+    fic_usunumdnt       int(10) NOT NULL,
 	PRIMARY KEY 	(fic_id)
  );
 
@@ -73,14 +73,14 @@ CREATE TABLE tbl_anuncio(
     anu_feccrn	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     anu_fecfn	Date NOT NULL,
     anu_ficid	Int(10) NOT NULL,
-    anu_usuid	Int(10) NOT NULL
+    anu_usunumdnt	Int(10) NOT NULL
 );
 
 
 CREATE TABLE tbl_login(
     log_id 	 		int(10) NOT NULL AUTO_INCREMENT,
     log_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    log_usuid		int(10) NOT NULL,
+    log_usunumdnt		int(10) NOT NULL,
     log_ficid		int(10) NOT NULL,
     PRIMARY KEY 	(log_id)
 );
@@ -109,11 +109,9 @@ CREATE TABLE tbl_respuesta(
 	res_comid     int(10)
 );
 CREATE TABLE tbl_usuario(	
-
-	usu_id 	 		int(10) AUTO_INCREMENT PRIMARY KEY ,
+    usu_numdnt      INT(15) NOT NULL  PRIMARY KEY ,
 	usu_nombre		varchar(60) NOT NULL,
 	usu_aplldo		varchar(60) NOT NULL,
-    usu_numdnt      INT(15) NOT NULL ,
 	usu_correo		varchar(99) NOT NULL,
     usu_passwd		varchar(32) NOT NULL,
 	usu_ficid		int(10) NOT NULL,
@@ -173,8 +171,8 @@ REFERENCES tbl_fases(fas_id) on delete cascade on update cascade;
 
 
 ALTER TABLE tbl_materialapoyo
-ADD FOREIGN KEY(map_usuid)
-REFERENCES tbl_usuario(usu_id) on delete cascade on update cascade;
+ADD FOREIGN KEY(map_usunumdnt)
+REFERENCES tbl_usuario(usu_numdnt) on delete cascade on update cascade;
 
 /*Material Apoyo - Ficha*/ 
 
@@ -217,8 +215,8 @@ ADD FOREIGN KEY(anu_ficid)
 REFERENCES tbl_ficha(fic_id) on delete cascade on update cascade;
 
 ALTER TABLE tbl_anuncio
-ADD FOREIGN KEY(anu_usuid)
-REFERENCES tbl_usuario(usu_id) on delete cascade on update cascade;
+ADD FOREIGN KEY(anu_usunumdnt)
+REFERENCES tbl_usuario(usunumdnt) on delete cascade on update cascade;
 
 /*tbl_foro*/
  
@@ -285,8 +283,8 @@ references tbl_tipoprograma(tpr_id) on delete cascade on update cascade;
 /*tbl_login*/
 
 alter table tbl_login
-add foreign key (log_usuid)
-references tbl_usuario(usu_id) on delete cascade on update cascade;
+add foreign key (log_usunumdnt)
+references tbl_usuario(usu_numdnt) on delete cascade on update cascade;
 
 alter table tbl_login
 add foreign key (log_ficid)
@@ -329,5 +327,5 @@ VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'asdasdasdasdas
 ('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1'),
 ('Camilo', 'Carabali Balanta', '1003214567', '1234', 'asdasdasdasda@gmail.com', '1', '1', '1', '1');
 
-INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficid`, `anu_usuid`) 
+INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficid`, `anu_usunumdnt`) 
 VALUES (NULL, 'el queso es barato', 'este es un anuncio para informar lo barato que es el queso', '2020-11-24', '2020-11-30', '1', '1');
