@@ -218,7 +218,7 @@ REFERENCES tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 ALTER TABLE tbl_anuncio
 ADD FOREIGN KEY(anu_usunumdnt)
-REFERENCES tbl_usuario(usunumdnt) on delete cascade on update cascade;
+REFERENCES tbl_usuario(usu_numdnt) on delete cascade on update cascade;
 
 /*tbl_foro*/
  
