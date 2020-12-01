@@ -14,7 +14,7 @@ CREATE TABLE tbl_materialapoyo(
     map_descrp	Varchar(255) NULL,
     map_archurl Varchar(500) NOT NULL,
     map_fasid	Int(10) NOT NULL,
-    map_usunumdnt  Int(10) NOT NULL
+    map_usunumdnt  INT(15) NOT NULL
 );
 
 CREATE TABLE tbl_noticia (
@@ -22,11 +22,13 @@ CREATE TABLE tbl_noticia (
     not_fech DATE NOT NULL DEFAULT CURRENT_DATE(),
     not_url varchar(500) NOT NULL
 );
+  
+
 
 CREATE TABLE tbl_materialapoyo_ficha(
     maf_id	  Int(10) auto_increment PRIMARY KEY,
     maf_mapid Int(10) NOT NULL,
-    maf_ficcodigo Int(10) NOT NULL
+    maf_ficcodigo VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE tbl_ficha(
@@ -245,7 +247,7 @@ references tbl_estado(est_id) on delete cascade on update cascade;
 alter table tbl_usuario
 add foreign key (usu_tipid)    /*New*/
 references tbl_tipoid(tip_id) on delete cascade on update cascade;
-
+ 
 alter table tbl_usuario
 add foreign key (usu_rolid)
 references tbl_rol(rol_id) on delete cascade on update cascade;
