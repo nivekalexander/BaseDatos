@@ -65,7 +65,7 @@ CREATE TABLE tbl_horario(
     hor_triini DATE NOT NULL,		
     hor_trifin	Date NOT NULL,
     hor_trinum	Int(10) NOT NULL,
-    hor_ficcodigo	Int(10) NOT NULL
+    hor_ficcodigo	VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE tbl_anuncio(
@@ -74,7 +74,7 @@ CREATE TABLE tbl_anuncio(
     anu_descrp	Varchar(2000) NULL,
     anu_feccrn	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     anu_fecfn	Date NOT NULL,
-    anu_ficcodigo	Int(10) NOT NULL,
+    anu_ficcodigo	VARCHAR(60) NOT NULL,
     anu_usunumdnt	Int(10) NOT NULL
 );
 
@@ -83,7 +83,7 @@ CREATE TABLE tbl_login(
     log_id 	 		int(10) NOT NULL AUTO_INCREMENT,
     log_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     log_usunumdnt		int(10) NOT NULL,
-    log_ficcodigo		int(10) NOT NULL,
+    log_ficcodigo		VARCHAR(60) NOT NULL,
     PRIMARY KEY 	(log_id)
 );
 
@@ -93,7 +93,7 @@ CREATE TABLE tbl_foro(
     for_fchfin DATE NOT NULL DEFAULT CURRENT_DATE(),
     for_fchini Date,
     for_descrp Varchar(2000) not null,
-    for_ficcodigo  int(10) not null
+    for_ficcodigo  VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE tbl_comentario(
@@ -116,7 +116,7 @@ CREATE TABLE tbl_usuario(
 	usu_aplldo		varchar(60) NOT NULL,
 	usu_correo		varchar(99) NOT NULL,
     usu_passwd		varchar(32) NOT NULL,
-	usu_ficcodigo		int(10) NOT NULL,
+	usu_ficcodigo		VARCHAR(60) NOT NULL,
     usu_rolid       int(10) NOT NULL,
     usu_estid       int(10) NOT NULL,
     usu_tipid       int(10) NOT NULL
@@ -142,7 +142,7 @@ CREATE TABLE tbl_aprendizficha(
     afi_id     int(10) auto_increment primary key,
     afi_usu    varchar (150) not null,
     afi_passwd varchar(45) not null,
-    afi_ficcodigo  int(10)not null,
+    afi_ficcodigo  VARCHAR(60) NOT NULL,
     afi_estid  int(10)not null,
     afi_rolid  int(10)not null
 );
