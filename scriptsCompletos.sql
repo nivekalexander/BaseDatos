@@ -13,6 +13,7 @@ CREATE TABLE tbl_materialapoyo(
     map_fecpub	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     map_descrp	Varchar(255) NULL,
     map_archurl Varchar(500) NOT NULL,
+    map_icono Varchar(100) NOT NULL,
     map_fasid	Int(10) NOT NULL,
     map_usunumdnt  INT(15) NOT NULL
 );
