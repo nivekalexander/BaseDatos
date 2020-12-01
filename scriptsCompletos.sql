@@ -40,7 +40,7 @@ CREATE TABLE tbl_ficha(
     fic_modid       int(10) NOT NULL,
     fic_tofid       int(10) NOT NULL,
     fic_pfoid       int(10) NOT NULL,
-    fic_usunumdnt       int(10) NOT NULL,
+    fic_usunumdnt       INT(15) NOT NULL,
 	PRIMARY KEY 	(fic_codigo)
  );
 
@@ -75,14 +75,14 @@ CREATE TABLE tbl_anuncio(
     anu_feccrn	DATE NOT NULL DEFAULT CURRENT_DATE(),	
     anu_fecfn	Date NOT NULL,
     anu_ficcodigo	VARCHAR(60) NOT NULL,
-    anu_usunumdnt	Int(10) NOT NULL
+    anu_usunumdnt	INT(15) NOT NULL
 );
 
 
 CREATE TABLE tbl_login(
     log_id 	 		int(10) NOT NULL AUTO_INCREMENT,
     log_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    log_usunumdnt		int(10) NOT NULL,
+    log_usunumdnt		INT(15) NOT NULL,
     log_ficcodigo		VARCHAR(60) NOT NULL,
     PRIMARY KEY 	(log_id)
 );
