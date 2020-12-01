@@ -295,7 +295,7 @@ INSERT INTO tbl_estado (est_nombre)
 VALUES ('Activo'),('Inactivo');
 
 INSERT INTO tbl_fases (fas_nombre)
-VALUES ('Análisis'),('Planeación'),('Planeación'),('Planeación');
+VALUES ('Análisis'),('Planeación'),('Ejecución'),('Evaluación');
 
 INSERT INTO tbl_modalidad (mod_nombre)
 VALUES ('Presencial'),('Virtual');
