@@ -40,7 +40,6 @@ CREATE TABLE tbl_ficha(
     fic_modid       int(10) NOT NULL,
     fic_tofid       int(10) NOT NULL,
     fic_pfoid       int(10) NOT NULL,
-    fic_usunumdnt       INT(15) NOT NULL,
 	PRIMARY KEY 	(fic_codigo)
  );
 
@@ -111,16 +110,15 @@ CREATE TABLE tbl_respuesta(
 	res_comid     int(10)
 );
 CREATE TABLE tbl_usuario(	
-    usu_numdnt      INT(15) NOT NULL  PRIMARY KEY ,
+    usu_numdnt      int(15) NOT NULL  PRIMARY KEY ,
 	usu_nombre		varchar(60) NOT NULL,
 	usu_aplldo		varchar(60) NOT NULL,
 	usu_correo		varchar(99) NOT NULL,
     usu_passwd		varchar(32) NOT NULL,
-	usu_ficcodigo		VARCHAR(60) NOT NULL,
+	usu_ficcodigo	VARCHAR(60) NOT NULL,
     usu_rolid       int(10) NOT NULL,
     usu_estid       int(10) NOT NULL,
     usu_tipid       int(10) NOT NULL
-	
 );
 
 CREATE TABLE tbl_tipoid(
