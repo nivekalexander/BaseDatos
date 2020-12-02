@@ -339,14 +339,17 @@ DELIMITER //
 CREATE PROCEDURE `LOGIN`(IN `USER` CHAR(50), IN `PASS` CHAR(50)) 
 BEGIN 
 
-        DECLARE USU CHAR(50);
+                DECLARE USU CHAR(50);
                 DECLARE ROL	CHAR(50);
                 DECLARE FIC	CHAR(50);
                 DECLARE IDUSU INT(10);
                 DECLARE IDFIC INT(10);
                 DECLARE CON INT unsigned;
+                DECLARE NOMBRE	CHAR(50);
+                DECLARE APELLIDO CHAR(50);
+                DECLARE CONTRA	CHAR(50);
 
-                SELECT usu_correo, usu_rolid , usu_ficcodigo ,usu_numdnt  ,fic_codigo  INTO @USU,@ROL,@FIC,@IDUSU,@IDFIC FROM tbl_usuario
+                SELECT usu_correo, usu_rolid , usu_ficcodigo ,usu_numdnt , fic_codigo , usu_nombre , usu_aplldo , usu_passwd INTO @USU,@ROL,@FIC,@IDUSU,@IDFIC,@NOMBRE,@APELLIDO,@CONTRA FROM tbl_usuario
                     
                     INNER JOIN tbl_ficha on usu_ficcodigo=fic_codigo
 
@@ -361,7 +364,7 @@ BEGIN
                     SET @RES="NO";
                 END IF;
 
-                SELECT @USU AS 'User',@FIC AS 'Ficha',@RES  AS 'Login',@ROL AS 'Rol',@IDUSU AS 'Idusu';
+                SELECT @USU AS 'User',@FIC AS 'Ficha',@RES  AS 'Login',@ROL AS 'Rol',@IDUSU AS 'Idusu',@NOMBRE AS 'Name',@APELLIDO AS 'Lastname',@CONTRA AS 'Passw';
 
 END //
 DELIMITER ;
