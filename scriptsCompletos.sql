@@ -1,6 +1,6 @@
-CREATE DATABASE proyectointranetpruebas;
+CREATE DATABASE maxlearning;
 
-USE proyectointranetpruebas; 
+USE maxlearning; 
 
 CREATE TABLE tbl_fases(
     fas_id	   Int(10) auto_increment PRIMARY KEY,
@@ -324,13 +324,45 @@ INSERT INTO `tbl_ficha` (`fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `
 VALUES ('1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
 
 INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_ficcodigo`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
-VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'asdasdasdasdas@gmail.com', '1907036', '1', '1', '1'),
-('Franklin', 'German Quihuang', '100764321', '1234', 'asdasdasdas@gmail.com', '1907036', '1', '1', '1'), 
-('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'asdasdasdasda@gmail.com', '1907036', '1', '1', '1'),
-('Camilo', 'Carabali Balanta', '1003214567', '1234', 'asdasdasdasda@gmail.com', '1907036', '1', '1', '1');
+VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'nivekalexander.12@gmail.com', '1907036', '1', '1', '1'),
+('Franklin', 'German Quihuang', '100764321', '1234', 'quihuang2017@gmail.com', '1907036', '1', '1', '1'), 
+('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'victor.zapata8069@gmail.com', '1907036', '1', '1', '1'),
+('Camilo', 'Carabali Balanta', '1003214567', '1234', 'valanya39@gmail.com', '1907036', '1', '1', '1');
 
 INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficcodigo`, `anu_usunumdnt`) 
 VALUES (NULL, 'el queso es barato', 'este es un anuncio para informar lo barato que es el queso', '2020-11-24', '2020-11-30', '1907036', '1004345279');
 
 INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficcodigo`, `anu_usunumdnt`) 
 VALUES (NULL, 'Las palomas vuelan', 'Las palomas solo saben volar,ates corrian pero la evolucion les dio alas', '2020-11-24', '2020-11-30', '1907036', '1001234567');
+
+DELIMITER //
+CREATE PROCEDURE `LOGIN`(IN `USER` CHAR(50), IN `PASS` CHAR(50)) 
+BEGIN 
+
+        DECLARE USU CHAR(50);
+                DECLARE ROL	CHAR(50);
+                DECLARE FIC	CHAR(50);
+                DECLARE IDUSU INT(10);
+                DECLARE IDFIC INT(10);
+                DECLARE CON INT unsigned;
+
+                SELECT usu_correo, usu_rolid , usu_ficcodigo ,usu_numdnt  ,fic_codigo  INTO @USU,@ROL,@FIC,@IDUSU,@IDFIC FROM tbl_usuario
+                    
+                    INNER JOIN tbl_ficha on usu_ficcodigo=fic_codigo
+
+                WHERE usu_correo=USER and usu_passwd=PASS;
+
+                SELECT COUNT(log_id) INTO @CON FROM tbl_login WHERE log_ficcodigo=@IDFIC;
+
+                IF @CON<6 AND @IDUSU>0 THEN
+                    INSERT INTO tbl_login (log_usunumdnt,log_ficcodigo) values (@IDUSU,@IDFIC);
+                    SET @RES="SI";
+                ELSE
+                    SET @RES="NO";
+                END IF;
+
+                SELECT @USU AS 'User',@FIC AS 'Ficha',@RES  AS 'Login',@ROL AS 'Rol',@IDUSU AS 'Idusu';
+
+END //
+DELIMITER ;
+
