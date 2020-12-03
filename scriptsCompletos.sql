@@ -73,7 +73,7 @@ CREATE TABLE tbl_anuncio(
     anu_titulo	Varchar(45) NOT NULL,
     anu_descrp	Varchar(2000) NULL,
     anu_feccrn	DATE NOT NULL DEFAULT CURRENT_DATE(),	
-    anu_fecfn	Date NOT NULL,
+    anu_fecfn	DATE NOT NULL DEFAULT CURRENT_DATE(),
     anu_ficcodigo	VARCHAR(60) NOT NULL,
     anu_usunumdnt	INT(15) NOT NULL
 );
@@ -91,7 +91,7 @@ CREATE TABLE tbl_foro(
     for_id     int(10) auto_increment primary key,
     for_titulo Varchar(45) not null,
     for_fchfin DATE NOT NULL DEFAULT CURRENT_DATE(),
-    for_fchini Date,
+    for_fchini DATE NOT NULL DEFAULT CURRENT_DATE(),
     for_descrp Varchar(2000) not null,
     for_ficcodigo  VARCHAR(60) NOT NULL,
     for_usunumdnt  INT(15)NOT NULL
