@@ -1,6 +1,6 @@
-CREATE DATABASE maxlearning;
+CREATE DATABASE pruebamaxlearning;
 
-USE maxlearning; 
+USE pruebamaxlearning; 
 
 CREATE TABLE tbl_fases(
     fas_id	   Int(10) auto_increment PRIMARY KEY,
@@ -83,7 +83,7 @@ CREATE TABLE tbl_login(
     log_id 	 		int(10) NOT NULL AUTO_INCREMENT,
     log_fchcrt		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     log_usunumdnt		INT(15) NOT NULL,
-    log_ficcodigo		VARCHAR(60) NOT NULL,
+    log_usfficcodigo		VARCHAR(60) NOT NULL,
     PRIMARY KEY 	(log_id)
 );
 
@@ -119,10 +119,17 @@ CREATE TABLE tbl_usuario(
 	usu_aplldo		varchar(60) NOT NULL,
 	usu_correo		varchar(99) NOT NULL,
     usu_passwd		varchar(32) NOT NULL,
-	usu_ficcodigo	VARCHAR(60) NOT NULL,
+	
     usu_rolid       int(10) NOT NULL,
     usu_estid       int(10) NOT NULL,
     usu_tipid       int(10) NOT NULL
+);
+
+
+CREATE TABLE tbl_usuario_ficha(
+    usf_id	  Int(10) auto_increment PRIMARY KEY,
+    usf_usunumdnt Int(15) NOT NULL,
+    usf_ficcodigo VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE tbl_tipoid(
@@ -140,14 +147,6 @@ CREATE TABLE tbl_estado(
     est_nombre varchar(30) not null
 );
 
-CREATE TABLE tbl_aprendizficha(
-    afi_id     int(10) auto_increment primary key,
-    afi_usu    varchar (150) not null,
-    afi_passwd varchar(45) not null,
-    afi_ficcodigo  VARCHAR(60) NOT NULL,
-    afi_estid  int(10)not null,
-    afi_rolid  int(10)not null
-);
 
 CREATE TABLE tbl_programaformacion(
     pfo_id     int(10) auto_increment primary key,
@@ -266,25 +265,18 @@ alter table tbl_usuario
 add foreign key (usu_rolid)
 references tbl_rol(rol_id) on delete cascade on update cascade;
 
-alter table tbl_usuario
-add foreign key (usu_ficcodigo)
+
+
+/*tbl_usuario_ficha*/
+
+alter table tbl_usuario_ficha
+add foreign key (usf_ficcodigo)
 references tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
+alter table tbl_usuario_ficha
+add foreign key (usf_usunumdnt)
+references tbl_usuario(usu_numdnt) on delete cascade on update cascade;
 
-/*tbl_aprendizficha*/
-
-alter table tbl_aprendizficha
-add foreign key (afi_ficcodigo)
-references tbl_ficha(fic_codigo) on delete cascade on update cascade;
-
-alter table tbl_aprendizficha
-add foreign key (afi_estid)
-references tbl_estado(est_id) on delete cascade on update cascade;
-
-
-alter table tbl_aprendizficha
-add foreign key (afi_rolid)
-references tbl_rol(rol_id) on delete cascade on update cascade;
 
 /*tbl_programaformacion*/
 
@@ -303,7 +295,7 @@ add foreign key (log_usunumdnt)
 references tbl_usuario(usu_numdnt) on delete cascade on update cascade;
 
 alter table tbl_login
-add foreign key (log_ficcodigo)
+add foreign key (log_usfficcodigo)
 references tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
 
@@ -338,13 +330,13 @@ VALUES (NULL, 'ref435123', '2 años', 'tadsi', 'tecnología en análisis de sist
 INSERT INTO `tbl_ficha` (`fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `fic_modid`, `fic_tofid`, `fic_pfoid`) 
 VALUES ('1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
 
-INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_ficcodigo`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
-VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'nivekalexander.12@gmail.com', '1907036', '1', '1', '1'),
-('Franklin', 'German Quihuang', '100764321', '1234', 'quihuang2017@gmail.com', '1907036', '1', '1', '1'), 
-('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'victor.zapata8069@gmail.com', '1907036', '1', '1', '1'),
-('Kevin', 'Romero', '54321', '1234', 'nivekalexander.16@gmail.com', '1907036', '2', '1', '1'),
-('adsi', '1907036', '1907036', '1234', 'adsi1907036', '1907036', '3', '1', '1'),
-('Camilo', 'Carabali Balanta', '1003214567', '1234', 'valanya39@gmail.com', '1907036', '1', '1', '1');
+INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
+VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'nivekalexander.12@gmail.com', '1', '1', '1'),
+('Franklin', 'German Quihuang', '100764321', '1234', 'quihuang2017@gmail.com', '1', '1', '1'), 
+('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'victor.zapata8069@gmail.com', '1', '1', '1'),
+('Kevin', 'Romero', '54321', '1234', 'nivekalexander.16@gmail.com', '2', '1', '1'),
+('adsi', '1907036', '1907036', '1234', 'adsi1907036', '3', '1', '1'),
+('Camilo', 'Carabali Balanta', '1003214567', '1234', 'valanya39@gmail.com', '1', '1', '1');
 
 INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficcodigo`, `anu_usunumdnt`) 
 VALUES (NULL, 'el queso es barato', 'este es un anuncio para informar lo barato que es el queso', '2020-11-24', '2020-11-30', '1907036', '1004345279');
@@ -366,19 +358,31 @@ BEGIN
                 DECLARE APELLIDO CHAR(50);
                 DECLARE CONTRA	CHAR(50);
 
-                SELECT usu_correo, usu_rolid , usu_ficcodigo ,usu_numdnt , fic_codigo , usu_nombre , usu_aplldo , usu_passwd INTO @USU,@ROL,@FIC,@IDUSU,@IDFIC,@NOMBRE,@APELLIDO,@CONTRA FROM tbl_usuario
-                    
-                    INNER JOIN tbl_ficha on usu_ficcodigo=fic_codigo
+SELECT tbl_usuario.usu_correo , tbl_usuario.usu_rolid , tbl_usuario_ficha.usf_ficcodigo , tbl_usuario.usu_numdnt , tbl_ficha.fic_codigo , tbl_usuario.usu_nombre , tbl_usuario.usu_aplldo , tbl_usuario.usu_passwd 
+INTO @USU,@ROL,@FIC,@IDUSU,@IDFIC,@NOMBRE,@APELLIDO,@CONTRA FROM tbl_usuario
+    
+    INNER JOIN tbl_ficha on tbl_ficha.fic_codigo = tbl_usuario_ficha.usf_ficcodigo
+    INNER JOIN tbl_usuario_ficha on tbl_usuario_ficha.usf_usunumdnt = tbl_usuario.usu_numdnt 
+    AND tbl_usuario_ficha.usf_ficcodigo = tbl_ficha.fic_codigo
 
-                WHERE usu_correo=USER and usu_passwd=PASS;
+WHERE tbl_usuario.usu_correo=USER and tbl_usuario.usu_passwd=PASS;
 
-                SELECT COUNT(log_id) INTO @CON FROM tbl_login WHERE log_ficcodigo=@IDFIC;
+                SELECT COUNT(log_id) INTO @CON FROM tbl_login WHERE log_usfficcodigo=@IDFIC;
 
-                IF @CON<6 AND @IDUSU>0 THEN
-                    INSERT INTO tbl_login (log_usunumdnt,log_ficcodigo) values (@IDUSU,@IDFIC);
-                    SET @RES="SI";
+                IF @ROL=3 THEN
+
+                    IF @CON<6 AND @IDUSU>0 THEN
+                        INSERT INTO tbl_login (log_usunumdnt,log_usfficcodigo) values (@IDUSU,@IDFIC);
+                        SET @RES="SI";
+                    ELSE
+                        SET @RES="NO";
+                    END IF;
+
                 ELSE
-                    SET @RES="NO";
+
+                    INSERT INTO tbl_login (log_usunumdnt,log_usfficcodigo) values (@IDUSU,@IDFIC);
+                    SET @RES="SI";
+                
                 END IF;
 
                 SELECT @USU AS 'User',@FIC AS 'Ficha',@RES  AS 'Login',@ROL AS 'Rol',@IDUSU AS 'Idusu',@NOMBRE AS 'Name',@APELLIDO AS 'Lastname',@CONTRA AS 'Passw';
