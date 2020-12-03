@@ -359,13 +359,12 @@ BEGIN
                 DECLARE CONTRA	CHAR(50);
 
 SELECT tbl_usuario.usu_correo , tbl_usuario.usu_rolid , tbl_usuario_ficha.usf_ficcodigo , tbl_usuario.usu_numdnt , tbl_ficha.fic_codigo , tbl_usuario.usu_nombre , tbl_usuario.usu_aplldo , tbl_usuario.usu_passwd 
-INTO @USU,@ROL,@FIC,@IDUSU,@IDFIC,@NOMBRE,@APELLIDO,@CONTRA FROM tbl_usuario
+INTO @USU,@ROL,@FIC,@IDUSU,@IDFIC,@NOMBRE,@APELLIDO,@CONTRA FROM tbl_usuario_ficha 
     
     INNER JOIN tbl_ficha on tbl_ficha.fic_codigo = tbl_usuario_ficha.usf_ficcodigo
-    INNER JOIN tbl_usuario_ficha on tbl_usuario_ficha.usf_usunumdnt = tbl_usuario.usu_numdnt 
-    AND tbl_usuario_ficha.usf_ficcodigo = tbl_ficha.fic_codigo
+    INNER JOIN tbl_usuario 
 
-WHERE tbl_usuario.usu_correo=USER and tbl_usuario.usu_passwd=PASS;
+WHERE tbl_usuario_ficha.usf_usunumdnt = tbl_usuario.usu_numdnt AND tbl_usuario_ficha.usf_ficcodigo = tbl_ficha.fic_codigo AND tbl_usuario.usu_correo=USER and tbl_usuario.usu_passwd=PASS;
 
                 SELECT COUNT(log_id) INTO @CON FROM tbl_login WHERE log_usfficcodigo=@IDFIC;
 
