@@ -93,7 +93,8 @@ CREATE TABLE tbl_foro(
     for_fchfin DATE NOT NULL DEFAULT CURRENT_DATE(),
     for_fchini Date,
     for_descrp Varchar(2000) not null,
-    for_ficcodigo  VARCHAR(60) NOT NULL
+    for_ficcodigo  VARCHAR(60) NOT NULL,
+    for_usunumdnt  INT(15)NOT NULL
 );
 
 CREATE TABLE tbl_comentario(
@@ -101,14 +102,16 @@ CREATE TABLE tbl_comentario(
     com_respst Varchar(2000) not null,
     com_fchcrt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     com_perprt Varchar(45),
-    com_forid  int(10)
+    com_forid  int(10),
+    com_usunumdnt  INT(15)NOT NULL
 );
 CREATE TABLE tbl_respuesta(
     res_id     int(10) auto_increment primary key,
     res_respst Varchar(2000) not null,
     res_fchcrt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     res_perprt Varchar(45),
-	res_comid     int(10)
+	res_comid     int(10),
+    res_usunumdnt  INT(15)NOT NULL
 );
 CREATE TABLE tbl_usuario(	
     usu_numdnt      int(15) NOT NULL  PRIMARY KEY ,
@@ -225,17 +228,29 @@ alter table tbl_foro
 add foreign key (for_ficcodigo)
 references tbl_ficha(fic_codigo) on delete cascade on update cascade;
 
+alter table tbl_foro
+add foreign key (for_usunumdnt)    
+references tbl_usuario(usu_numdnt) on delete cascade on update cascade;
+
 /*tbl_comentario*/
 
 alter table tbl_comentario
 add foreign key (com_forid)
 references tbl_foro(for_id) on delete cascade on update cascade;
 
+alter table tbl_comentario
+add foreign key (com_usunumdnt)    
+references tbl_usuario(usu_numdnt) on delete cascade on update cascade;
+
 /*tbl_respuesta*/
 
 alter table tbl_respuesta
 add foreign key (res_comid)
 references tbl_comentario(com_id) on delete cascade on update cascade;
+
+alter table tbl_respuesta
+add foreign key (res_usunumdnt)    
+references tbl_usuario(usu_numdnt) on delete cascade on update cascade;
 
 /*tbl_usuario*/
 
@@ -244,7 +259,7 @@ add foreign key (usu_estid)
 references tbl_estado(est_id) on delete cascade on update cascade;
 
 alter table tbl_usuario
-add foreign key (usu_tipid)    /*New*/
+add foreign key (usu_tipid)    
 references tbl_tipoid(tip_id) on delete cascade on update cascade;
  
 alter table tbl_usuario
@@ -336,7 +351,7 @@ INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `
 VALUES (NULL, 'Las palomas vuelan', 'Las palomas solo saben volar,ates corrian pero la evolucion les dio alas', '2020-11-24', '2020-11-30', '1907036', '1001234567');
 
 DELIMITER //
-CREATE PROCEDURE `LOGIN`(IN `USER` CHAR(50), IN `PASS` CHAR(50)) 
+CREATE PROCEDURE `LOGIN`(IN `USER` VARCHAR(50), IN `PASS` VARCHAR(50)) 
 BEGIN 
 
                 DECLARE USU CHAR(50);
