@@ -342,6 +342,7 @@ INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd
 VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'nivekalexander.12@gmail.com', '1907036', '1', '1', '1'),
 ('Franklin', 'German Quihuang', '100764321', '1234', 'quihuang2017@gmail.com', '1907036', '1', '1', '1'), 
 ('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'victor.zapata8069@gmail.com', '1907036', '1', '1', '1'),
+('Kevin', 'Romero', '54321', '1234', 'nivekalexander.16@gmail.com', '1907036', '2', '1', '1'),
 ('Camilo', 'Carabali Balanta', '1003214567', '1234', 'valanya39@gmail.com', '1907036', '1', '1', '1');
 
 INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficcodigo`, `anu_usunumdnt`) 
