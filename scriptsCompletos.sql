@@ -1,6 +1,6 @@
-CREATE DATABASE pruebamaxlearning;
+CREATE DATABASE maxlearning;
 
-USE pruebamaxlearning; 
+USE maxlearning; 
 
 CREATE TABLE tbl_fases(
     fas_id	   Int(10) auto_increment PRIMARY KEY,
