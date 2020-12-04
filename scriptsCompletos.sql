@@ -334,18 +334,20 @@ INSERT INTO `tbl_ficha` (`fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `
 VALUES ('000000', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
 
 INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
-VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'nivekalexander.12@gmail.com', '1', '1', '1'),
-('Franklin', 'German Quihuang', '100764321', '1234', 'quihuang2017@gmail.com', '1', '1', '1'), 
-('Víctor Alfonso', 'Zapata Ocampo', '1001234567', '1234', 'victor.zapata8069@gmail.com', '1', '1', '1'),
-('Kevin', 'Romero', '54321', '1234', 'nivekalexander.16@gmail.com', '2', '1', '1'),
-('adsi', '1907036', '1907036', '1234', 'adsi1907036', '3', '1', '1'),
-('Camilo', 'Carabali Balanta', '1003214567', '1234', 'valanya39@gmail.com', '1', '1', '1');
+VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', md5(1234), 'nivekalexander.12@gmail.com', '1', '1', '1'),
+('Franklin', 'German Quihuang', '100764321', md5(1234), 'quihuang2017@gmail.com', '1', '1', '1'), 
+('Víctor Alfonso', 'Zapata Ocampo', '1001234567', md5(1234), 'victor.zapata8069@gmail.com', '1', '1', '1'),
+('Kevin', 'Romero', '54321', md5(1234), 'nivekalexander.16@gmail.com', '2', '1', '1'),
+('adsi', '1907036', '1907036', md5(1234), 'adsi1907036', '3', '1', '1'),
+('Camilo', 'Carabali Balanta', '1003214567', md5(1234), 'valanya39@gmail.com', '1', '1', '1');
 
 INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficcodigo`, `anu_usunumdnt`) 
 VALUES (NULL, 'el queso es barato', 'este es un anuncio para informar lo barato que es el queso', '2020-11-24', '2020-11-30', '1907036', '1004345279');
 
 INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `anu_fecfn`, `anu_ficcodigo`, `anu_usunumdnt`) 
 VALUES (NULL, 'Las palomas vuelan', 'Las palomas solo saben volar,ates corrian pero la evolucion les dio alas', '2020-11-24', '2020-11-30', '1907036', '1001234567');
+
+INSERT INTO `tbl_usuario_ficha` (`usf_id`, `usf_usunumdnt`, `usf_ficcodigo`) VALUES (NULL, '1907036', '1907036'), (NULL, '1003214567', '1907036'), (NULL, '100764321', '1907036'), (NULL, '54321', '1907036'), (NULL, '1004345279', '1907036'), (NULL, '1001234567', '1907036');
 
 DELIMITER //
 CREATE PROCEDURE `LOGIN`(IN `USER` VARCHAR(50), IN `PASS` VARCHAR(50)) 
