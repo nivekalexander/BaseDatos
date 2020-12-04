@@ -366,7 +366,10 @@ INTO @USU,@ROL,@FIC,@IDUSU,@IDFIC,@NOMBRE,@APELLIDO,@CONTRA FROM tbl_usuario_fic
     INNER JOIN tbl_ficha on tbl_ficha.fic_codigo = tbl_usuario_ficha.usf_ficcodigo
     INNER JOIN tbl_usuario 
 
-WHERE tbl_usuario_ficha.usf_usunumdnt = tbl_usuario.usu_numdnt AND tbl_usuario_ficha.usf_ficcodigo = tbl_ficha.fic_codigo AND tbl_usuario.usu_correo=USER and tbl_usuario.usu_passwd=PASS;
+WHERE tbl_usuario_ficha.usf_usunumdnt = tbl_usuario.usu_numdnt 
+AND tbl_usuario_ficha.usf_ficcodigo = tbl_ficha.fic_codigo 
+AND tbl_usuario.usu_correo=USER 
+AND tbl_usuario.usu_passwd=PASS LIMIT 1;
 
                 SELECT COUNT(log_id) INTO @CON FROM tbl_login WHERE log_usfficcodigo=@IDFIC;
 
