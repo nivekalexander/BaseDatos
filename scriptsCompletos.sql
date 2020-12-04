@@ -330,6 +330,9 @@ VALUES (NULL, 'ref435123', '2 años', 'tadsi', 'tecnología en análisis de sist
 INSERT INTO `tbl_ficha` (`fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `fic_modid`, `fic_tofid`, `fic_pfoid`) 
 VALUES ('1907036', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
 
+INSERT INTO `tbl_ficha` (`fic_codigo`, `fic_feccrn`, `fic_fecfn`, `fic_tijid`, `fic_modid`, `fic_tofid`, `fic_pfoid`) 
+VALUES ('000000', '2020-11-24', '2020-11-28', '1', '1', '1', '1');
+
 INSERT INTO `tbl_usuario` ( `usu_nombre`, `usu_aplldo`,`usu_numdnt`, `usu_passwd`, `usu_correo`, `usu_rolid`, `usu_estid`, `usu_tipid`) 
 VALUES ('Kevin Alexander', 'Garcia Romero','1004345279', '1234', 'nivekalexander.12@gmail.com', '1', '1', '1'),
 ('Franklin', 'German Quihuang', '100764321', '1234', 'quihuang2017@gmail.com', '1', '1', '1'), 
