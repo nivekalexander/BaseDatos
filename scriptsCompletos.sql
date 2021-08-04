@@ -348,7 +348,7 @@ INSERT INTO `tbl_anuncio` (`anu_id`, `anu_titulo`, `anu_descrp`, `anu_feccrn`, `
 VALUES (NULL, 'Las palomas vuelan', 'Las palomas solo saben volar,ates corrian pero la evolucion les dio alas', '2020-11-24', '2020-11-30', '1907036', '1001234567');
 
 INSERT INTO `tbl_usuario_ficha` (`usf_id`, `usf_usunumdnt`, `usf_ficcodigo`) VALUES (NULL, '1907036', '1907036'), (NULL, '1003214567', '1907036'), (NULL, '100764321', '1907036'), (NULL, '54321', '1907036'), (NULL, '1004345279', '1907036'), (NULL, '1001234567', '1907036');
-
+/* se reemplazo por codigo php
 DELIMITER //
 CREATE PROCEDURE `LOGIN`(IN `USER` VARCHAR(50), IN `PASS` VARCHAR(50)) 
 BEGIN 
@@ -396,4 +396,5 @@ AND tbl_usuario.usu_passwd=PASS LIMIT 1;
 
 END //
 DELIMITER ;
+*/
 
